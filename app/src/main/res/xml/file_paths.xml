@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FileProvider: ảnh thực đơn để chia sẻ Zalo (F25) và ảnh Mẹ chụp món (F08). -->
+<paths>
+    <cache-path name="share" path="share/" />
+    <cache-path name="camera" path="camera/" />
+    <files-path name="dish_images" path="dish_images/" />
+</paths>

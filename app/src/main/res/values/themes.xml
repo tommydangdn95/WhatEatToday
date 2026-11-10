@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.WhatEatToday" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Nền màn hình chờ trùng màu nền app (Paper) để không bị chớp trắng/đen khi mở. -->
+    <style name="Theme.HomNayAnGi" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/paper</item>
+    </style>
 </resources>
