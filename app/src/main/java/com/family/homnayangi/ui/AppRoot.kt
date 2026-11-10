@@ -26,11 +26,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.family.homnayangi.R
+import com.family.homnayangi.ui.history.HistoryScreen
 import com.family.homnayangi.ui.today.TodayScreen
 
 /** 5 tab ở thanh điều hướng dưới cùng (SPEC mục 9). */
@@ -59,13 +61,7 @@ fun AppRoot() {
                 Tab.entries.forEach { tab ->
                     NavigationBarItem(
                         selected = currentRoute == tab.route,
-                        onClick = {
-                            nav.navigate(tab.route) {
-                                popUpTo(nav.graph.findStartDestination().id) { saveState = true }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
+                        onClick = { nav.navigateToTab(tab) },
                         icon = {
                             val m = Modifier.size(28.dp)
                             when {
@@ -87,13 +83,22 @@ fun AppRoot() {
         },
     ) { padding ->
         NavHost(nav, startDestination = Tab.TODAY.route, modifier = Modifier.padding(padding)) {
-            composable(Tab.TODAY.route) { TodayScreen() }
+            composable(Tab.TODAY.route) { TodayScreen(onOpenSettings = { nav.navigate(SETTINGS_ROUTE) }) }
             composable(Tab.PANTRY.route) { ComingSoon("Tủ lạnh có gì") }
             composable(Tab.SHOPPING.route) { ComingSoon("Đi chợ") }
             composable(Tab.DISHES.route) { ComingSoon("Món của nhà") }
-            composable(Tab.HISTORY.route) { ComingSoon("Lịch sử") }
+            composable(Tab.HISTORY.route) { HistoryScreen(onCookAgain = { nav.navigateToTab(Tab.TODAY) }) }
+            composable(SETTINGS_ROUTE) { ComingSoon("Cài đặt") }
         }
     }
+}
+
+private const val SETTINGS_ROUTE = "settings"
+
+private fun NavHostController.navigateToTab(tab: Tab) = navigate(tab.route) {
+    popUpTo(graph.findStartDestination().id) { saveState = true }
+    launchSingleTop = true
+    restoreState = true
 }
 
 @Composable

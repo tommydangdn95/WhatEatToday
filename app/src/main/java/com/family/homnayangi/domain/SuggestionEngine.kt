@@ -161,6 +161,45 @@ class SuggestionEngine(private val random: Random = Random.Default) {
         return MealSuggestion(current.picks.toMutableList().also { it[index] = SlotPick(target.slot, replacement) })
     }
 
+    /**
+     * Xếp một danh sách món có sẵn (mâm đã chốt, mâm chép từ Lịch sử) vào các slot.
+     * Món không còn trong kho (đã xoá) bị bỏ qua. Nếu [fillMissing] = true, slot bắt buộc còn thiếu được gợi ý thêm.
+     */
+    fun arrange(
+        dishes: List<DishInfo>,
+        ctx: SuggestionContext,
+        dishIds: List<String>,
+        fillMissing: Boolean,
+    ): MealSuggestion {
+        val lastEaten = daysSinceLastEaten(ctx)
+        val byId = dishes.associateBy { it.id }
+        val scored = dishIds.distinct().mapNotNull { byId[it] }.map { score(it, ctx, lastEaten[it.id]) }
+
+        val remaining = scored.toMutableList()
+        fun take(slot: MealSlot): ScoredDish? =
+            remaining.firstOrNull { it.dish.category in slot.categories }?.also { remaining.remove(it) }
+
+        val required = listOf(MealSlot.MAN, MealSlot.CANH, MealSlot.RAU, MealSlot.MON_4)
+        val picks = required.map { SlotPick(it, take(it)) }.toMutableList()
+        remaining.forEach { picks += SlotPick(MealSlot.THEM, it) }
+        while (picks.size < ctx.minDishes) picks += SlotPick(MealSlot.THEM, null)
+
+        if (fillMissing && picks.any { it.dish == null }) {
+            val ranked = rank(dishes, ctx)
+            for (i in picks.indices) {
+                if (picks[i].dish != null) continue
+                val used = picks.mapNotNull { it.dish?.dish }
+                val chosen = pickForSlot(
+                    picks[i].slot, ranked, ctx, lastEaten,
+                    used.mapTo(HashSet()) { it.id },
+                    used.flatMapTo(HashSet()) { it.proteinIngredientIds },
+                )
+                picks[i] = SlotPick(picks[i].slot, chosen)
+            }
+        }
+        return MealSuggestion(if (fillMissing) picks else picks.filter { it.dish != null })
+    }
+
     private fun pickForSlot(
         slot: MealSlot,
         ranked: List<ScoredDish>,

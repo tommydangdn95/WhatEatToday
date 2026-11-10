@@ -257,6 +257,26 @@ class SuggestionEngineTest {
         }
     }
 
+    // ------------------------------------------------------------ xếp mâm có sẵn (chốt / chép từ Lịch sử)
+
+    @Test
+    fun `xep mon da chot vao dung slot`() {
+        val engine = SuggestionEngine(Random(1))
+        val meal = engine.suggest(seedDishes, ctx())
+        val shuffled = meal.dishIds.reversed()
+        val arranged = engine.arrange(seedDishes, ctx(), shuffled, fillMissing = false)
+        assertEquals(meal.picks.map { it.slot to it.dish!!.dish.id }, arranged.picks.map { it.slot to it.dish!!.dish.id })
+    }
+
+    @Test
+    fun `mam chep thieu mon thi goi y them, bo mon da xoa`() {
+        val man = seedDishes.first { it.category == DishCategory.MAN }.id
+        val arranged = SuggestionEngine(Random(2)).arrange(seedDishes, ctx(), listOf(man, "mon_da_xoa"), fillMissing = true)
+        assertEquals(4, arranged.dishIds.size)
+        assertEquals(man, arranged.picks.first { it.slot == MealSlot.MAN }.dish!!.dish.id)
+        assertTrue(arranged.picks.all { it.dish != null })
+    }
+
     private fun <T : Any> assertNotNullAndGet(value: T?): T {
         assertNotNull(value)
         return value!!

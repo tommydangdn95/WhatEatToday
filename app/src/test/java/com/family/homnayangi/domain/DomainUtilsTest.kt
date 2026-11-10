@@ -4,7 +4,8 @@ import com.family.homnayangi.data.seed.SeedParser
 import com.family.homnayangi.domain.model.MealTarget
 import com.family.homnayangi.domain.model.MealType
 import com.family.homnayangi.domain.model.WeatherClass
-import com.family.homnayangi.ui.today.TodayUiState
+import com.family.homnayangi.domain.model.MealRecord
+import com.family.homnayangi.ui.history.HistoryBuilder
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -29,9 +30,9 @@ class MealSlotResolverTest {
 
     @Test
     fun `tieu de theo tieu chi chap nhan F01`() {
-        assertEquals("Trưa mai ăn gì?", TodayUiState.titleFor(at(20, 30), day))
-        assertEquals("Tối nay ăn gì?", TodayUiState.titleFor(at(12), day))
-        assertEquals("Trưa nay ăn gì?", TodayUiState.titleFor(at(6), day))
+        assertEquals("Trưa mai ăn gì?", MenuText.question(at(20, 30), day))
+        assertEquals("Tối nay ăn gì?", MenuText.question(at(12), day))
+        assertEquals("Trưa nay ăn gì?", MenuText.question(at(6), day))
     }
 }
 
@@ -91,4 +92,67 @@ class SeedParserTest {
         val error = runCatching { SeedParser.parse(bad) }.exceptionOrNull()
         assertTrue(error is IllegalArgumentException)
     }
+}
+
+class MenuTextTest {
+    private val today = LocalDate.of(2026, 11, 10) // Thứ Ba
+
+    @Test
+    fun `mau chu gui Zalo dung F25`() {
+        val text = MenuText.shareMessage(
+            MealTarget(today, MealType.TRUA), today,
+            listOf("Thịt ba chỉ rang cháy cạnh", "Rau muống luộc", "Canh cua rau đay mướp", "Đậu phụ sốt cà chua"),
+        )
+        assertEquals(
+            """Trưa nay mẹ nấu (T3, 10/11):
+            |- Thịt ba chỉ rang cháy cạnh
+            |- Rau muống luộc
+            |- Canh cua rau đay mướp
+            |- Đậu phụ sốt cà chua""".trimMargin(),
+            text,
+        )
+    }
+
+    @Test
+    fun `ngay tuong doi va thu`() {
+        assertEquals("Tối mai mẹ nấu", MenuText.shareHeading(MealTarget(today.plusDays(1), MealType.TOI), today))
+        assertEquals("Trưa T5 12/11 ăn gì?", MenuText.question(MealTarget(today.plusDays(2), MealType.TRUA), today))
+        assertEquals("CN", MenuText.weekday(LocalDate.of(2026, 11, 15)))
+        assertEquals("T2", MenuText.weekday(LocalDate.of(2026, 11, 9)))
+        assertEquals("Thứ Ba, 10/11", MenuText.longDate(today))
+        assertEquals("Chủ nhật, 15/11", MenuText.longDate(LocalDate.of(2026, 11, 15)))
+    }
+}
+
+class HistoryBuilderTest {
+    private val today = LocalDate.of(2026, 11, 10) // Thứ Ba
+
+    @Test
+    fun `chia theo tuan, tuan moi nhat len dau`() {
+        val history = listOf(
+            MealRecord(today, MealType.TRUA, listOf("a")),
+            MealRecord(today.minusDays(7), MealType.TOI, listOf("b", "xoa")),
+        )
+        val weeks = HistoryBuilder.build(history, mapOf("a" to dish("a", "Món A"), "b" to dish("b", "Món B")), today)
+        assertEquals(2, weeks.size)
+        assertEquals("Tuần này (09/11 – 15/11)", weeks[0].title)
+        assertEquals("Tuần trước (02/11 – 08/11)", weeks[1].title)
+        assertEquals(7, weeks[0].days.size)
+        val tue = weeks[0].days[1]
+        assertTrue(tue.isToday)
+        assertEquals(listOf("Món A"), tue.lunch!!.dishNames)
+        assertEquals(null, tue.dinner)
+        assertEquals(listOf("Món B", "(món đã xoá)"), weeks[1].days[1].dinner!!.dishNames)
+    }
+
+    @Test
+    fun `lich su trong van hien tuan nay`() {
+        val weeks = HistoryBuilder.build(emptyList(), emptyMap(), today)
+        assertEquals(1, weeks.size)
+    }
+
+    private fun dish(id: String, name: String) = com.family.homnayangi.domain.model.DishInfo(
+        id, name, com.family.homnayangi.domain.model.DishCategory.MAN, emptySet(),
+        com.family.homnayangi.domain.model.Region.BAC, 10, emptyList(),
+    )
 }

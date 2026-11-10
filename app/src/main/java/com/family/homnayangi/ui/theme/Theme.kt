@@ -46,6 +46,10 @@ private val ColorScheme = lightColorScheme(
     surfaceContainer = Color(0xFFF5EEE4),
     surfaceContainerHigh = Color(0xFFEFE8DE),
     surfaceContainerHighest = Color(0xFFE9E2D8),
+    // Snackbar: nền tối + chữ nút "Hoàn tác" xanh nhạt (≈ 9:1).
+    inverseSurface = Color(0xFF2F3030),
+    inverseOnSurface = Color(0xFFF1F0EE),
+    inversePrimary = Color(0xFFA6D9A0),
     outline = Line,
     outlineVariant = Color(0xFFC6C6CC),
 )
