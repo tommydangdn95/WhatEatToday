@@ -69,19 +69,22 @@ class SuggestionEngine(private val random: Random = Random.Default) {
 
     /** [daysSinceLastEaten] = null nếu chưa từng ăn. */
     fun recencyScore(daysSinceLastEaten: Long?): Int =
-        if (daysSinceLastEaten == null) 20 else min(daysSinceLastEaten, 20L).toInt()
+        if (daysSinceLastEaten == null) RECENCY_MAX else min(daysSinceLastEaten, RECENCY_MAX.toLong()).toInt()
+
+    /** Món yêu thích chỉ được cộng điểm; mọi điều kiện lọc (ẩn, tránh lặp, đúng loại, trùng thịt/cá) vẫn áp dụng như món khác. */
+    fun favoriteScore(dish: DishInfo): Int = if (dish.isFavorite) FAVORITE else 0
 
     fun pantryScore(dish: DishInfo, pantry: Set<String>): Double {
         if (dish.mainIngredients.isEmpty()) return 0.0
         val have = dish.mainIngredients.count { it.id in pantry }
-        return 15.0 * have / dish.mainIngredients.size
+        return PANTRY_MAX.toDouble() * have / dish.mainIngredients.size
     }
 
     fun score(dish: DishInfo, ctx: SuggestionContext, daysSinceLastEaten: Long?): ScoredDish {
         val total = weatherScore(dish.seasons, ctx.weather) +
             regionScore(dish.region) +
             recencyScore(daysSinceLastEaten) +
-            (if (dish.isFavorite) 15 else 0) +
+            favoriteScore(dish) +
             pantryScore(dish, ctx.pantry)
         return ScoredDish(
             dish = dish,
@@ -242,6 +245,13 @@ class SuggestionEngine(private val random: Random = Random.Default) {
     }
 
     companion object {
+        // Thang điểm 100 (SPEC 8.2). Yêu thích chiếm 10%.
+        const val WEATHER_MAX = 30
+        const val REGION_MAX = 20
+        const val RECENCY_MAX = 25
+        const val FAVORITE = 10
+        const val PANTRY_MAX = 15
+
         const val TOP_N = 6
         const val QUICK_COOK_MIN = 30
     }

@@ -1,6 +1,6 @@
 # SPEC — App "Hôm nay ăn gì" (bản 1: Android cho Mẹ)
 
-> Phiên bản spec: 1.1 · 2026-11-10 (thêm F10 — công thức nấu vào bản 1)
+> Phiên bản spec: 1.2 · 2026-11-10 (1.1: thêm F10 công thức nấu · 1.2: món yêu thích chiếm 10% điểm, tab Món nhà có lọc Yêu thích)
 > Nguồn: tài liệu requirements "App 'Hôm nay ăn gì' cho Mẹ — Requirements".
 > File dữ liệu đi kèm: `seed_data.json` (80 món + nguyên liệu) và `recipes.json` (công thức 80 món) → đặt trong `app/src/main/assets/`.
 
@@ -321,6 +321,10 @@ Form: tên (bắt buộc), loại (4 nút lớn), ảnh (chụp hoặc chọn), 
 
 Trên thẻ món và trong Món của nhà: nút tim (yêu thích) và "Nhà không ăn món này" (ẩn). Món ẩn không bao giờ được gợi ý; có mục "Món đã ẩn" để bỏ ẩn.
 
+- Tab Món nhà có 3 chip lọc kèm số món: **Tất cả** (không gồm món ẩn) · **Yêu thích** · **Đã ẩn**; ô tìm không dấu; danh sách nhóm theo loại (Mặn, Xào, Rau, Canh), tên A→Z.
+- Bỏ yêu thích và ẩn món đều có Snackbar "Hoàn tác" 5 giây. Bấm vào món → màn hình Cách nấu (F10).
+- Món yêu thích được cộng 10/100 điểm khi gợi ý (mục 8.2).
+
 ### F10 — Xem cách nấu
 
 - Trên thẻ món (màn hình Hôm nay): bấm vào ảnh / tên món hoặc dòng "Xem cách nấu ›" → màn hình Cách nấu.
@@ -407,8 +411,8 @@ Thuần Kotlin, không phụ thuộc Android, nhận vào toàn bộ dữ liệu
 | --- | --- |
 | Hợp thời tiết | 30 |
 | Vùng miền | 20 |
-| Lâu chưa ăn | 20 |
-| Yêu thích | 15 |
+| Lâu chưa ăn | 25 |
+| Yêu thích | 10 |
 | Có sẵn đồ trong tủ lạnh | 15 |
 
 Chi tiết:
@@ -420,10 +424,14 @@ weatherScore =
   BINH_THUONG: QUANH_NAM → 25 · còn lại → 20
 
 regionScore   = BAC → 20 · CHUNG → 10 · TRUNG/NAM → 0
-recencyScore  = chưa từng ăn → 20 · ngược lại min(daysSinceLastEaten, 20)
-favoriteScore = isFavorite ? 15 : 0
+recencyScore  = chưa từng ăn → 25 · ngược lại min(daysSinceLastEaten, 25)
+favoriteScore = isFavorite ? 10 : 0
 pantryScore   = 15 × (số nguyên liệu chính đang có / tổng số nguyên liệu chính)
 ```
+
+Món yêu thích **chỉ được cộng điểm** (chiếm 10% thang điểm). Mọi điều kiện ở 8.1 và F02 vẫn áp dụng như món khác:
+món yêu thích bị ẩn không bao giờ được gợi ý, vừa ăn trong `repeatAvoidDays` ngày thì bị loại (trừ khi phải nới điều kiện),
+vẫn theo bộ lọc nhanh, đúng loại của slot, không trùng thịt/cá trong mâm.
 
 ### 8.3 Chọn món
 
@@ -438,6 +446,7 @@ pantryScore   = 15 × (số nguyên liệu chính đang có / tổng số nguyê
 - Món ăn hôm qua không xuất hiện khi `repeatAvoidDays = 4` (trừ khi phải nới điều kiện).
 - Ngày NONG: món chỉ có mùa LANH không bao giờ đứng đầu.
 - Không có 2 món trùng nguyên liệu thịt/cá chính.
+- Tổng trọng số = 100, yêu thích = 10. Món yêu thích được gợi ý thường hơn, nhưng vẫn tuân thủ ẩn / tránh lặp / lọc nhanh / F02.
 
 ---
 

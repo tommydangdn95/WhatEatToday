@@ -34,6 +34,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.family.homnayangi.R
+import com.family.homnayangi.ui.dishes.DishesScreen
 import com.family.homnayangi.ui.history.HistoryScreen
 import com.family.homnayangi.ui.recipe.RecipeScreen
 import com.family.homnayangi.ui.recipe.RecipeViewModel
@@ -95,7 +96,7 @@ fun AppRoot() {
             }
             composable(Tab.PANTRY.route) { ComingSoon("Tủ lạnh có gì") }
             composable(Tab.SHOPPING.route) { ComingSoon("Đi chợ") }
-            composable(Tab.DISHES.route) { ComingSoon("Món của nhà") }
+            composable(Tab.DISHES.route) { DishesScreen(onOpenRecipe = { nav.navigate(RecipeViewModel.route(it)) }) }
             composable(Tab.HISTORY.route) { HistoryScreen(onCookAgain = { nav.navigateToTab(Tab.TODAY) }) }
             composable(SETTINGS_ROUTE) { ComingSoon("Cài đặt") }
             composable(

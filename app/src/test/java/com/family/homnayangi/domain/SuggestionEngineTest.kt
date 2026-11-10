@@ -187,7 +187,7 @@ class SuggestionEngineTest {
         assertTrue(full.hasPantryIngredient)
 
         val half = e.score(dish, ctx(WeatherClass.NONG, pantry = setOf("thit")), daysSinceLastEaten = 3)
-        assertEquals(30 + 20 + 3 + 15 + 7.5, half.score, 0.001)
+        assertEquals(30 + 20 + 3 + 10 + 7.5, half.score, 0.001)
     }
 
     @Test
@@ -275,6 +275,64 @@ class SuggestionEngineTest {
         assertEquals(4, arranged.dishIds.size)
         assertEquals(man, arranged.picks.first { it.slot == MealSlot.MAN }.dish!!.dish.id)
         assertTrue(arranged.picks.all { it.dish != null })
+    }
+
+    // ------------------------------------------------------------ món yêu thích (chiếm 10/100 điểm)
+
+    @Test
+    fun `trong so cac tieu chi cong lai bang 100, yeu thich chiem 10`() {
+        with(SuggestionEngine) {
+            assertEquals(100, WEATHER_MAX + REGION_MAX + RECENCY_MAX + FAVORITE + PANTRY_MAX)
+            assertEquals(10, FAVORITE)
+        }
+        assertEquals(25, SuggestionEngine().recencyScore(null))
+        assertEquals(25, SuggestionEngine().recencyScore(40))
+    }
+
+    @Test
+    fun `mon yeu thich xep tren mon giong het nhung khong yeu thich`() {
+        val base = seedDishes.first { it.category == DishCategory.CANH }
+        val fav = base.copy(id = "z_fav", isFavorite = true)
+        val plain = base.copy(id = "a_plain")
+        val ranked = SuggestionEngine().rank(listOf(plain, fav), ctx())
+        assertEquals("z_fav", ranked.first().dish.id)
+        assertEquals(10.0, ranked[0].score - ranked[1].score, 0.001)
+    }
+
+    @Test
+    fun `mon yeu thich duoc goi y thuong xuyen hon`() {
+        val favIds = seedDishes.filter { it.category == DishCategory.CANH }.take(3).map { it.id }.toSet()
+        val withFav = seedDishes.map { if (it.id in favIds) it.copy(isFavorite = true) else it }
+        fun count(dishes: List<DishInfo>) = (0 until 2000).count { seed ->
+            SuggestionEngine(Random(seed)).suggest(dishes, ctx()).dishIds.any { it in favIds }
+        }
+        val before = count(seedDishes)
+        val after = count(withFav)
+        assertTrue("có yêu thích: $after lần, không: $before lần", after > before)
+    }
+
+    @Test
+    fun `mon yeu thich van tuan thu luat cu`() {
+        val canh = seedDishes.filter { it.category == DishCategory.CANH }
+        val eatenYesterday = canh[0].id
+        val hidden = canh[1].id
+        val dishes = seedDishes.map {
+            when (it.id) {
+                eatenYesterday -> it.copy(isFavorite = true)
+                hidden -> it.copy(isFavorite = true, isHidden = true)
+                else -> it
+            }
+        }
+        val c = ctx(history = listOf(MealRecord(today.minusDays(1), MealType.TOI, listOf(eatenYesterday))), quickOnly = true)
+        repeat(500) { seed ->
+            val meal = SuggestionEngine(Random(seed)).suggest(dishes, c)
+            assertFalse("món yêu thích bị ẩn vẫn được gợi ý", hidden in meal.dishIds)
+            assertFalse("món yêu thích vừa ăn hôm qua vẫn được gợi ý", eatenYesterday in meal.dishIds)
+            assertTrue("bộ lọc nhanh bị bỏ qua", meal.picks.all { it.dish!!.dish.cookTimeMin < 30 })
+            val proteins = meal.picks.mapNotNull { it.dish?.dish }.flatMap { it.proteinIngredientIds }
+            assertEquals(proteins.size, proteins.toSet().size)
+            assertEquals(listOf(MealSlot.MAN, MealSlot.CANH, MealSlot.RAU, MealSlot.MON_4), meal.picks.map { it.slot })
+        }
     }
 
     private fun <T : Any> assertNotNullAndGet(value: T?): T {

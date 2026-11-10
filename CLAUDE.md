@@ -51,7 +51,7 @@ data/
   repo/      DishRepository, MealRepository, PantryRepository
 di/          AppModule (Hilt)
 share/       ZaloSharer
-ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, today/, history/, recipe/
+ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, today/, history/, recipe/, dishes/
 ```
 
 - MVVM: `@HiltViewModel` + `StateFlow`; màn hình dùng `hiltViewModel()` từ `androidx.hilt.lifecycle.viewmodel.compose`.
@@ -71,6 +71,7 @@ ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, toda
 - **Quyền:** không khai báo `CAMERA` (chụp ảnh qua `TakePicture` không cần quyền; khai báo mà chưa cấp sẽ crash). Không xin vị trí, bộ nhớ.
 - Code dùng API > 28 phải bọc `if (Build.VERSION.SDK_INT >= …)`.
 - `SuggestionEngine` thay đổi gì cũng phải thêm/cập nhật test trong `SuggestionEngineTest`.
+- **Trọng số điểm** nằm ở hằng số trong `SuggestionEngine.Companion` (thời tiết 30, vùng 20, lâu chưa ăn 25, **yêu thích 10** theo yêu cầu người dùng, tủ lạnh 15; tổng phải = 100, có test kiểm). Món yêu thích chỉ được cộng điểm, không bao giờ được bỏ qua điều kiện lọc (ẩn, tránh lặp, lọc nhanh, đúng slot, trùng thịt/cá).
 
 ## Thử trên máy thật
 
@@ -90,17 +91,18 @@ MSYS_NO_PATHCONV=1 "$ADB" shell am start -W -n com.family.homnayangi/.MainActivi
 - Logcat lọc theo `SeedLoader` để xem dữ liệu ban đầu đã nạp chưa. Crash của `com.google.android.gms` trên máy này là của Google Play Services, không phải app.
 - Máy test **chưa cài Zalo** → nút "Gửi cho cả nhà" mở bảng chọn app (đúng SPEC).
 
-## Tiến độ (cập nhật 10/11/2026, sau F10)
+## Tiến độ (cập nhật 10/11/2026, sau F10 + yêu thích)
 
 Đã xong (đều đã chạy thử trên máy):
 - Khung project, Room, SeedLoader, SuggestionEngine + 28 unit test
 - **Hôm nay** (F01–F05, tim/ẩn của F09 trên thẻ): chọn bữa/ngày, đổi món, đổi cả mâm, lọc món nhanh, chốt, chọn lại, gửi Zalo **dạng chữ**
 - **Lịch sử** (F11): theo tuần, "Nấu lại mâm này"
+- **Món nhà** (F07, F09): lọc Tất cả / Yêu thích / Đã ẩn, tìm không dấu, tim, ẩn / bỏ ẩn có Hoàn tác, bấm món → Cách nấu. Món yêu thích = 10/100 điểm khi gợi ý
 - **Cách nấu** (F10): công thức 80 món (`recipes.json`), xem / sửa / thêm, nút tìm video YouTube; DB v2 + test migration chạy trên máy
 
 Chưa làm (theo thứ tự SPEC §11):
 1. Tủ lạnh (F06, F20) → Đi chợ (F12, F13; chốt mâm tự thêm nguyên liệu, trừ đồ có trong tủ lạnh)
-2. Món nhà (F07–F09: danh sách, tìm không dấu, thêm/sửa món, mục "Món đã ẩn")
+2. Thêm / sửa / xoá món riêng của Mẹ (F08) — nút "Thêm món" trong tab Món nhà
 3. Nhắc nhở (F17), thời tiết Open-Meteo (F19 — hiện đang dùng mặc định theo tháng), ảnh thực đơn PNG cho Zalo (F25)
 4. Cài đặt (nút bánh răng đang mở trang trống), hướng dẫn Vivo, ký APK release + bật R8
 
@@ -108,6 +110,7 @@ Vấn đề đang mở:
 - Mở app lần đầu ~4 giây trên bản debug (SPEC yêu cầu < 2 giây) → đo lại trên bản release có R8.
 - Chưa có ảnh món; đang dùng ô màu theo loại món (`CategoryBadge`). Thẻ món khá cao, một màn hình chỉ thấy ~2 thẻ — xem lại bố cục khi thêm ảnh.
 - `canh_chua_ca` trong seed có mùa `["NONG","LANH"]` (được 30 điểm cả ngày nóng lẫn lạnh); đã đề xuất đổi thành `QUANH_NAM`, người dùng chưa quyết.
-- Máy test còn dữ liệu thử: bữa tối 10/11 đã chốt, món "Nem rán" đang bị ẩn, công thức "Giả cầy" đã bị sửa thử (thêm dòng "La lot thai chi").
+- Máy test còn dữ liệu thử: bữa tối 10/11 đã chốt, "Cá kho riềng" và "Cá chép om dưa" đang yêu thích, công thức "Giả cầy" đã bị sửa thử (thêm dòng "La lot thai chi"). Đã bỏ ẩn hết món.
+- Khi thử bằng script: bấm "Hoàn tác" phải ngay sau khi ẩn (thanh chỉ hiện 5 giây); lần mở app đầu tiên ngay sau `adb install` đôi khi bị Android bỏ qua → kiểm tra `mResumedActivity` rồi mở lại.
 - Ô sửa "Các bước nấu" là một ô nhiều dòng: bước dài tự xuống dòng trông giống 2 bước. Nếu Mẹ thấy khó dùng thì đổi sang mỗi bước một ô riêng.
-- Màn hình Lịch sử chưa có lối vào Cách nấu (mới chỉ có ở thẻ món màn hình Hôm nay; Món nhà sẽ có khi làm F07–F09).
+- Màn hình Lịch sử chưa có lối vào Cách nấu (đã có ở thẻ món tab Hôm nay và tab Món nhà).
