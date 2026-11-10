@@ -1,0 +1,1532 @@
+{
+  "version": 1,
+  "note": "Mùa (seasons) và thời gian nấu (cookTimeMin) là ước tính ban đầu, Mẹ sửa được trong app. region: BAC = món miền Bắc, CHUNG = món cả nước.",
+  "ingredients": [
+    {
+      "id": "thit_ba_chi",
+      "name": "Thịt ba chỉ",
+      "group": "THIT",
+      "aliases": [
+        "ba chỉ",
+        "ba rọi"
+      ]
+    },
+    {
+      "id": "thit_nac",
+      "name": "Thịt nạc vai",
+      "group": "THIT",
+      "aliases": [
+        "thịt nạc",
+        "nạc vai"
+      ]
+    },
+    {
+      "id": "thit_bam",
+      "name": "Thịt băm",
+      "group": "THIT",
+      "aliases": [
+        "thịt xay",
+        "thịt bằm"
+      ]
+    },
+    {
+      "id": "suon",
+      "name": "Sườn lợn",
+      "group": "THIT",
+      "aliases": [
+        "sườn",
+        "sườn non"
+      ]
+    },
+    {
+      "id": "chan_gio",
+      "name": "Chân giò",
+      "group": "THIT",
+      "aliases": [
+        "móng giò",
+        "giò heo"
+      ]
+    },
+    {
+      "id": "xuong",
+      "name": "Xương ống",
+      "group": "THIT",
+      "aliases": [
+        "xương",
+        "xương lợn"
+      ]
+    },
+    {
+      "id": "ga",
+      "name": "Thịt gà",
+      "group": "THIT",
+      "aliases": [
+        "gà"
+      ]
+    },
+    {
+      "id": "long_ga",
+      "name": "Lòng mề gà",
+      "group": "THIT",
+      "aliases": [
+        "lòng gà",
+        "mề gà"
+      ]
+    },
+    {
+      "id": "vit",
+      "name": "Thịt vịt",
+      "group": "THIT",
+      "aliases": [
+        "vịt"
+      ]
+    },
+    {
+      "id": "bo",
+      "name": "Thịt bò",
+      "group": "THIT",
+      "aliases": [
+        "bò"
+      ]
+    },
+    {
+      "id": "ca_ro_phi",
+      "name": "Cá rô phi",
+      "group": "CA_HAI_SAN",
+      "aliases": [
+        "rô phi"
+      ]
+    },
+    {
+      "id": "ca_dieu_hong",
+      "name": "Cá diêu hồng",
+      "group": "CA_HAI_SAN",
+      "aliases": [
+        "cá điêu hồng",
+        "diêu hồng"
+      ]
+    },
+    {
+      "id": "ca_thu",
+      "name": "Cá thu",
+      "group": "CA_HAI_SAN",
+      "aliases": []
+    },
+    {
+      "id": "ca_nuc",
+      "name": "Cá nục",
+      "group": "CA_HAI_SAN",
+      "aliases": []
+    },
+    {
+      "id": "ca_chep",
+      "name": "Cá chép",
+      "group": "CA_HAI_SAN",
+      "aliases": []
+    },
+    {
+      "id": "ca_tram",
+      "name": "Cá trắm",
+      "group": "CA_HAI_SAN",
+      "aliases": [
+        "trắm"
+      ]
+    },
+    {
+      "id": "cha_ca",
+      "name": "Chả cá",
+      "group": "CA_HAI_SAN",
+      "aliases": []
+    },
+    {
+      "id": "tom",
+      "name": "Tôm",
+      "group": "CA_HAI_SAN",
+      "aliases": []
+    },
+    {
+      "id": "tep",
+      "name": "Tép",
+      "group": "CA_HAI_SAN",
+      "aliases": [
+        "tép đồng",
+        "tôm đồng"
+      ]
+    },
+    {
+      "id": "muc",
+      "name": "Mực",
+      "group": "CA_HAI_SAN",
+      "aliases": []
+    },
+    {
+      "id": "cua_dong",
+      "name": "Cua đồng",
+      "group": "CA_HAI_SAN",
+      "aliases": [
+        "cua"
+      ]
+    },
+    {
+      "id": "ngao",
+      "name": "Ngao",
+      "group": "CA_HAI_SAN",
+      "aliases": [
+        "nghêu"
+      ]
+    },
+    {
+      "id": "trung",
+      "name": "Trứng",
+      "group": "TRUNG_DAU",
+      "aliases": [
+        "trứng gà",
+        "trứng vịt"
+      ]
+    },
+    {
+      "id": "dau_phu",
+      "name": "Đậu phụ",
+      "group": "TRUNG_DAU",
+      "aliases": [
+        "đậu hũ",
+        "đậu"
+      ]
+    },
+    {
+      "id": "ca_chua",
+      "name": "Cà chua",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "rau_muong",
+      "name": "Rau muống",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "rau_day",
+      "name": "Rau đay",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "mong_toi",
+      "name": "Mồng tơi",
+      "group": "RAU_CU",
+      "aliases": [
+        "mùng tơi"
+      ]
+    },
+    {
+      "id": "rau_ngot",
+      "name": "Rau ngót",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "cai_xanh",
+      "name": "Cải canh",
+      "group": "RAU_CU",
+      "aliases": [
+        "cải xanh",
+        "cải bẹ"
+      ]
+    },
+    {
+      "id": "cai_ngong",
+      "name": "Cải ngồng",
+      "group": "RAU_CU",
+      "aliases": [
+        "ngồng cải"
+      ]
+    },
+    {
+      "id": "bap_cai",
+      "name": "Bắp cải",
+      "group": "RAU_CU",
+      "aliases": [
+        "cải bắp"
+      ]
+    },
+    {
+      "id": "su_hao",
+      "name": "Su hào",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "su_su",
+      "name": "Su su",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "ngon_su_su",
+      "name": "Ngọn su su",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "bi_xanh",
+      "name": "Bí xanh",
+      "group": "RAU_CU",
+      "aliases": [
+        "bí đao"
+      ]
+    },
+    {
+      "id": "bi_do",
+      "name": "Bí đỏ",
+      "group": "RAU_CU",
+      "aliases": [
+        "bí ngô"
+      ]
+    },
+    {
+      "id": "ngon_bi",
+      "name": "Ngọn bí",
+      "group": "RAU_CU",
+      "aliases": [
+        "rau bí"
+      ]
+    },
+    {
+      "id": "bau",
+      "name": "Bầu",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "muop",
+      "name": "Mướp",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "muop_dang",
+      "name": "Mướp đắng",
+      "group": "RAU_CU",
+      "aliases": [
+        "khổ qua"
+      ]
+    },
+    {
+      "id": "dau_bap",
+      "name": "Đậu bắp",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "do_que",
+      "name": "Đỗ cô ve",
+      "group": "RAU_CU",
+      "aliases": [
+        "đậu cô ve",
+        "đỗ",
+        "đậu que"
+      ]
+    },
+    {
+      "id": "gia",
+      "name": "Giá đỗ",
+      "group": "RAU_CU",
+      "aliases": [
+        "giá"
+      ]
+    },
+    {
+      "id": "khoai_tay",
+      "name": "Khoai tây",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "khoai_so",
+      "name": "Khoai sọ",
+      "group": "RAU_CU",
+      "aliases": [
+        "khoai môn"
+      ]
+    },
+    {
+      "id": "ca_rot",
+      "name": "Cà rốt",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "rau_lang",
+      "name": "Rau lang",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "ca_tim",
+      "name": "Cà tím",
+      "group": "RAU_CU",
+      "aliases": []
+    },
+    {
+      "id": "sup_lo",
+      "name": "Súp lơ",
+      "group": "RAU_CU",
+      "aliases": [
+        "bông cải"
+      ]
+    },
+    {
+      "id": "can_toi",
+      "name": "Cần tỏi",
+      "group": "RAU_CU",
+      "aliases": [
+        "rau cần",
+        "cần tây"
+      ]
+    },
+    {
+      "id": "doc_mung",
+      "name": "Dọc mùng",
+      "group": "RAU_CU",
+      "aliases": [
+        "bạc hà"
+      ]
+    },
+    {
+      "id": "mang",
+      "name": "Măng",
+      "group": "KHAC",
+      "aliases": [
+        "măng tươi",
+        "măng khô"
+      ]
+    },
+    {
+      "id": "dua_cai",
+      "name": "Dưa cải chua",
+      "group": "KHAC",
+      "aliases": [
+        "dưa chua",
+        "dưa cải"
+      ]
+    },
+    {
+      "id": "sau",
+      "name": "Quả sấu",
+      "group": "KHAC",
+      "aliases": [
+        "sấu"
+      ]
+    },
+    {
+      "id": "la_lot",
+      "name": "Lá lốt",
+      "group": "KHAC",
+      "aliases": []
+    },
+    {
+      "id": "chuoi_xanh",
+      "name": "Chuối xanh",
+      "group": "KHAC",
+      "aliases": []
+    }
+  ],
+  "dishes": [
+    {
+      "id": "thit_ba_chi_rang_chay_canh",
+      "name": "Thịt ba chỉ rang cháy cạnh",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 25,
+      "mainIngredients": [
+        "thit_ba_chi"
+      ]
+    },
+    {
+      "id": "thit_kho_trung",
+      "name": "Thịt kho trứng",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "thit_ba_chi",
+        "trung"
+      ]
+    },
+    {
+      "id": "thit_luoc_mam_tom",
+      "name": "Thịt luộc chấm mắm tôm",
+      "category": "MAN",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 30,
+      "mainIngredients": [
+        "thit_ba_chi"
+      ]
+    },
+    {
+      "id": "tom_rang_thit",
+      "name": "Tôm rang thịt ba chỉ",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 25,
+      "mainIngredients": [
+        "tom",
+        "thit_ba_chi"
+      ]
+    },
+    {
+      "id": "cha_la_lot",
+      "name": "Chả lá lốt",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 40,
+      "mainIngredients": [
+        "thit_bam",
+        "la_lot"
+      ]
+    },
+    {
+      "id": "trung_duc_thit",
+      "name": "Trứng đúc thịt",
+      "category": "MAN",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "trung",
+        "thit_bam"
+      ]
+    },
+    {
+      "id": "suon_xao_chua_ngot",
+      "name": "Sườn xào chua ngọt",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 40,
+      "mainIngredients": [
+        "suon"
+      ]
+    },
+    {
+      "id": "suon_rim",
+      "name": "Sườn rim",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 40,
+      "mainIngredients": [
+        "suon"
+      ]
+    },
+    {
+      "id": "chan_gio_luoc",
+      "name": "Chân giò luộc",
+      "category": "MAN",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "chan_gio"
+      ]
+    },
+    {
+      "id": "thit_dong",
+      "name": "Thịt đông",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 120,
+      "mainIngredients": [
+        "chan_gio",
+        "thit_nac"
+      ]
+    },
+    {
+      "id": "gia_cay",
+      "name": "Giả cầy",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 90,
+      "mainIngredients": [
+        "chan_gio"
+      ]
+    },
+    {
+      "id": "thit_kho_dua",
+      "name": "Thịt kho dưa cải",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 45,
+      "mainIngredients": [
+        "thit_ba_chi",
+        "dua_cai"
+      ]
+    },
+    {
+      "id": "thit_vien_sot_ca_chua",
+      "name": "Thịt viên sốt cà chua",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 40,
+      "mainIngredients": [
+        "thit_bam",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "nem_ran",
+      "name": "Nem rán",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "thit_bam"
+      ]
+    },
+    {
+      "id": "ga_luoc_la_chanh",
+      "name": "Gà luộc lá chanh",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 45,
+      "mainIngredients": [
+        "ga"
+      ]
+    },
+    {
+      "id": "ga_rang_gung",
+      "name": "Gà rang gừng",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 35,
+      "mainIngredients": [
+        "ga"
+      ]
+    },
+    {
+      "id": "ga_kho_sa",
+      "name": "Gà kho sả",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 40,
+      "mainIngredients": [
+        "ga"
+      ]
+    },
+    {
+      "id": "vit_om_sau",
+      "name": "Vịt om sấu",
+      "category": "MAN",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "vit",
+        "sau"
+      ]
+    },
+    {
+      "id": "vit_luoc_mam_gung",
+      "name": "Vịt luộc chấm mắm gừng",
+      "category": "MAN",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "vit"
+      ]
+    },
+    {
+      "id": "ca_kho_rieng",
+      "name": "Cá kho riềng",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 90,
+      "mainIngredients": [
+        "ca_tram"
+      ]
+    },
+    {
+      "id": "ca_ro_phi_ran",
+      "name": "Cá rô phi rán",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 25,
+      "mainIngredients": [
+        "ca_ro_phi"
+      ]
+    },
+    {
+      "id": "ca_dieu_hong_sot_ca_chua",
+      "name": "Cá diêu hồng rán sốt cà chua",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 35,
+      "mainIngredients": [
+        "ca_dieu_hong",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "ca_thu_sot_ca_chua",
+      "name": "Cá thu sốt cà chua",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 35,
+      "mainIngredients": [
+        "ca_thu",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "ca_nuc_kho",
+      "name": "Cá nục kho",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "ca_nuc"
+      ]
+    },
+    {
+      "id": "ca_kho_chuoi_dau",
+      "name": "Cá kho chuối đậu",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 120,
+      "mainIngredients": [
+        "ca_tram",
+        "chuoi_xanh",
+        "dau_phu"
+      ]
+    },
+    {
+      "id": "ca_chep_om_dua",
+      "name": "Cá chép om dưa",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 45,
+      "mainIngredients": [
+        "ca_chep",
+        "dua_cai"
+      ]
+    },
+    {
+      "id": "tep_rang_la_chanh",
+      "name": "Tép rang lá chanh",
+      "category": "MAN",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "tep"
+      ]
+    },
+    {
+      "id": "tom_rim",
+      "name": "Tôm rim",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 25,
+      "mainIngredients": [
+        "tom"
+      ]
+    },
+    {
+      "id": "cha_ca_ran",
+      "name": "Chả cá rán",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "cha_ca"
+      ]
+    },
+    {
+      "id": "dau_phu_sot_ca_chua",
+      "name": "Đậu phụ sốt cà chua",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 25,
+      "mainIngredients": [
+        "dau_phu",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "dau_phu_nhoi_thit",
+      "name": "Đậu phụ nhồi thịt sốt cà chua",
+      "category": "MAN",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 45,
+      "mainIngredients": [
+        "dau_phu",
+        "thit_bam",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "dau_ran_mam_tom",
+      "name": "Đậu rán chấm mắm tôm",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "dau_phu"
+      ]
+    },
+    {
+      "id": "dau_ran_tam_hanh",
+      "name": "Đậu rán tẩm hành",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "dau_phu"
+      ]
+    },
+    {
+      "id": "trung_ran",
+      "name": "Trứng rán",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "trung"
+      ]
+    },
+    {
+      "id": "trung_hap_van",
+      "name": "Trứng hấp vân",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 25,
+      "mainIngredients": [
+        "trung",
+        "thit_bam"
+      ]
+    },
+    {
+      "id": "ca_bung",
+      "name": "Cà bung (cà tím om đậu)",
+      "category": "MAN",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 45,
+      "mainIngredients": [
+        "ca_tim",
+        "dau_phu"
+      ]
+    },
+    {
+      "id": "rau_muong_xao_toi",
+      "name": "Rau muống xào tỏi",
+      "category": "RAU",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "rau_muong"
+      ]
+    },
+    {
+      "id": "bap_cai_xao_ca_chua",
+      "name": "Bắp cải xào cà chua",
+      "category": "RAU",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "bap_cai",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "su_su_xao_toi",
+      "name": "Su su xào tỏi",
+      "category": "RAU",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "su_su"
+      ]
+    },
+    {
+      "id": "do_xao_thit",
+      "name": "Đỗ xào thịt",
+      "category": "XAO",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "do_que",
+        "thit_nac"
+      ]
+    },
+    {
+      "id": "bo_xao_can_toi",
+      "name": "Bò xào cần tỏi",
+      "category": "XAO",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "bo",
+        "can_toi"
+      ]
+    },
+    {
+      "id": "bo_xao_sup_lo",
+      "name": "Bò xào súp lơ",
+      "category": "XAO",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "bo",
+        "sup_lo"
+      ]
+    },
+    {
+      "id": "khoai_tay_xao_bo",
+      "name": "Khoai tây xào thịt bò",
+      "category": "XAO",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 25,
+      "mainIngredients": [
+        "khoai_tay",
+        "bo"
+      ]
+    },
+    {
+      "id": "dua_cai_xao_thit",
+      "name": "Dưa cải xào thịt",
+      "category": "XAO",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "dua_cai",
+        "thit_ba_chi"
+      ]
+    },
+    {
+      "id": "muop_xao_long_ga",
+      "name": "Mướp xào lòng gà",
+      "category": "XAO",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "muop",
+        "long_ga"
+      ]
+    },
+    {
+      "id": "gia_xao",
+      "name": "Giá xào",
+      "category": "RAU",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "gia"
+      ]
+    },
+    {
+      "id": "muc_xao_can_toi",
+      "name": "Mực xào cần tỏi",
+      "category": "XAO",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "muc",
+        "can_toi"
+      ]
+    },
+    {
+      "id": "mang_xao_thit",
+      "name": "Măng xào thịt",
+      "category": "XAO",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 30,
+      "mainIngredients": [
+        "mang",
+        "thit_ba_chi"
+      ]
+    },
+    {
+      "id": "muop_dang_xao_trung",
+      "name": "Mướp đắng xào trứng",
+      "category": "XAO",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "muop_dang",
+        "trung"
+      ]
+    },
+    {
+      "id": "ngon_su_su_xao_toi",
+      "name": "Ngọn su su xào tỏi",
+      "category": "RAU",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "ngon_su_su"
+      ]
+    },
+    {
+      "id": "rau_muong_luoc",
+      "name": "Rau muống luộc chấm nước luộc dầm sấu",
+      "category": "RAU",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "rau_muong",
+        "sau"
+      ]
+    },
+    {
+      "id": "bap_cai_luoc",
+      "name": "Bắp cải luộc",
+      "category": "RAU",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "bap_cai"
+      ]
+    },
+    {
+      "id": "su_hao_luoc",
+      "name": "Su hào luộc",
+      "category": "RAU",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "su_hao"
+      ]
+    },
+    {
+      "id": "cai_ngong_luoc",
+      "name": "Cải ngồng luộc",
+      "category": "RAU",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "cai_ngong"
+      ]
+    },
+    {
+      "id": "ngon_bi_luoc",
+      "name": "Ngọn bí luộc",
+      "category": "RAU",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "ngon_bi"
+      ]
+    },
+    {
+      "id": "dau_bap_luoc",
+      "name": "Đậu bắp luộc",
+      "category": "RAU",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "dau_bap"
+      ]
+    },
+    {
+      "id": "rau_lang_luoc",
+      "name": "Rau lang luộc",
+      "category": "RAU",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "rau_lang"
+      ]
+    },
+    {
+      "id": "nom_rau_muong",
+      "name": "Nộm rau muống",
+      "category": "RAU",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "rau_muong"
+      ]
+    },
+    {
+      "id": "canh_cua_rau_day_muop",
+      "name": "Canh cua rau đay mướp",
+      "category": "CANH",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 40,
+      "mainIngredients": [
+        "cua_dong",
+        "rau_day",
+        "muop"
+      ]
+    },
+    {
+      "id": "canh_cua_mong_toi",
+      "name": "Canh cua mồng tơi",
+      "category": "CANH",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 40,
+      "mainIngredients": [
+        "cua_dong",
+        "mong_toi"
+      ]
+    },
+    {
+      "id": "canh_suon_sau",
+      "name": "Canh sườn nấu sấu",
+      "category": "CANH",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "suon",
+        "sau"
+      ]
+    },
+    {
+      "id": "canh_ca_doc_mung",
+      "name": "Canh cá nấu dọc mùng",
+      "category": "CANH",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 40,
+      "mainIngredients": [
+        "ca_chep",
+        "doc_mung",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "canh_rieu_cua",
+      "name": "Canh riêu cua",
+      "category": "CANH",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 45,
+      "mainIngredients": [
+        "cua_dong",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "canh_bau_tom",
+      "name": "Canh bầu nấu tôm",
+      "category": "CANH",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "bau",
+        "tom"
+      ]
+    },
+    {
+      "id": "canh_bi_xanh_tom",
+      "name": "Canh bí xanh nấu tôm",
+      "category": "CANH",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "bi_xanh",
+        "tom"
+      ]
+    },
+    {
+      "id": "canh_rau_ngot_thit_bam",
+      "name": "Canh rau ngót thịt băm",
+      "category": "CANH",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "rau_ngot",
+        "thit_bam"
+      ]
+    },
+    {
+      "id": "canh_ngao_nau_chua",
+      "name": "Canh ngao nấu chua",
+      "category": "CANH",
+      "seasons": [
+        "NONG"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 25,
+      "mainIngredients": [
+        "ngao",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "canh_cai_nau_thit",
+      "name": "Canh cải nấu thịt",
+      "category": "CANH",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 20,
+      "mainIngredients": [
+        "cai_xanh",
+        "thit_bam"
+      ]
+    },
+    {
+      "id": "canh_su_hao_xuong",
+      "name": "Canh su hào nấu xương",
+      "category": "CANH",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "su_hao",
+        "xuong"
+      ]
+    },
+    {
+      "id": "canh_bap_cai_cuon_thit",
+      "name": "Canh bắp cải cuộn thịt",
+      "category": "CANH",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 40,
+      "mainIngredients": [
+        "bap_cai",
+        "thit_bam"
+      ]
+    },
+    {
+      "id": "canh_khoai_tay_ca_rot_suon",
+      "name": "Canh khoai tây cà rốt nấu sườn",
+      "category": "CANH",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "khoai_tay",
+        "ca_rot",
+        "suon"
+      ]
+    },
+    {
+      "id": "canh_mang_ham_chan_gio",
+      "name": "Canh măng hầm chân giò",
+      "category": "CANH",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 120,
+      "mainIngredients": [
+        "mang",
+        "chan_gio"
+      ]
+    },
+    {
+      "id": "canh_dua_chua_ca",
+      "name": "Canh dưa chua nấu cá",
+      "category": "CANH",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 35,
+      "mainIngredients": [
+        "dua_cai",
+        "ca_chep"
+      ]
+    },
+    {
+      "id": "canh_bi_do_xuong",
+      "name": "Canh bí đỏ nấu xương",
+      "category": "CANH",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "bi_do",
+        "xuong"
+      ]
+    },
+    {
+      "id": "canh_khoai_so_xuong",
+      "name": "Canh khoai sọ nấu xương",
+      "category": "CANH",
+      "seasons": [
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 60,
+      "mainIngredients": [
+        "khoai_so",
+        "xuong"
+      ]
+    },
+    {
+      "id": "canh_chua_ca",
+      "name": "Canh chua cá",
+      "category": "CANH",
+      "seasons": [
+        "NONG",
+        "LANH"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 35,
+      "mainIngredients": [
+        "ca_dieu_hong",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "canh_trung_ca_chua",
+      "name": "Canh trứng cà chua",
+      "category": "CANH",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 10,
+      "mainIngredients": [
+        "trung",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "canh_dau_phu_ca_chua",
+      "name": "Canh đậu phụ cà chua",
+      "category": "CANH",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "BAC",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "dau_phu",
+        "ca_chua"
+      ]
+    },
+    {
+      "id": "canh_gia_thit_bam",
+      "name": "Canh giá thịt băm",
+      "category": "CANH",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 15,
+      "mainIngredients": [
+        "gia",
+        "thit_bam"
+      ]
+    },
+    {
+      "id": "canh_ca_ngot",
+      "name": "Canh cá ngót",
+      "category": "CANH",
+      "seasons": [
+        "QUANH_NAM"
+      ],
+      "region": "CHUNG",
+      "cookTimeMin": 30,
+      "mainIngredients": [
+        "ca_ro_phi",
+        "ca_chua"
+      ]
+    }
+  ]
+}
