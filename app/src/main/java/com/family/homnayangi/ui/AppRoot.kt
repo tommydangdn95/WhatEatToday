@@ -27,12 +27,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.family.homnayangi.R
 import com.family.homnayangi.ui.history.HistoryScreen
+import com.family.homnayangi.ui.recipe.RecipeScreen
+import com.family.homnayangi.ui.recipe.RecipeViewModel
 import com.family.homnayangi.ui.today.TodayScreen
 
 /** 5 tab ở thanh điều hướng dưới cùng (SPEC mục 9). */
@@ -83,12 +87,21 @@ fun AppRoot() {
         },
     ) { padding ->
         NavHost(nav, startDestination = Tab.TODAY.route, modifier = Modifier.padding(padding)) {
-            composable(Tab.TODAY.route) { TodayScreen(onOpenSettings = { nav.navigate(SETTINGS_ROUTE) }) }
+            composable(Tab.TODAY.route) {
+                TodayScreen(
+                    onOpenSettings = { nav.navigate(SETTINGS_ROUTE) },
+                    onOpenRecipe = { nav.navigate(RecipeViewModel.route(it)) },
+                )
+            }
             composable(Tab.PANTRY.route) { ComingSoon("Tủ lạnh có gì") }
             composable(Tab.SHOPPING.route) { ComingSoon("Đi chợ") }
             composable(Tab.DISHES.route) { ComingSoon("Món của nhà") }
             composable(Tab.HISTORY.route) { HistoryScreen(onCookAgain = { nav.navigateToTab(Tab.TODAY) }) }
             composable(SETTINGS_ROUTE) { ComingSoon("Cài đặt") }
+            composable(
+                RecipeViewModel.ROUTE,
+                arguments = listOf(navArgument(RecipeViewModel.ARG_DISH_ID) { type = NavType.StringType }),
+            ) { RecipeScreen(onBack = { nav.popBackStack() }) }
         }
     }
 }

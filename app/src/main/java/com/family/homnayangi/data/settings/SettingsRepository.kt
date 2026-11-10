@@ -44,6 +44,7 @@ class SettingsRepository @Inject constructor(
         val remindersEnabled = booleanPreferencesKey("remindersEnabled")
         val quickFilterUnder30 = booleanPreferencesKey("quickFilterUnder30")
         val seedVersion = intPreferencesKey("seedVersion")
+        val recipesVersion = intPreferencesKey("recipesVersion")
     }
 
     private val defaults = AppSettings()
@@ -71,6 +72,9 @@ class SettingsRepository @Inject constructor(
 
     suspend fun seedVersion(): Int = dataStore.data.first()[Keys.seedVersion] ?: 0
     suspend fun setSeedVersion(version: Int) = dataStore.edit { it[Keys.seedVersion] = version }
+
+    suspend fun recipesVersion(): Int = dataStore.data.first()[Keys.recipesVersion] ?: 0
+    suspend fun setRecipesVersion(version: Int) = dataStore.edit { it[Keys.recipesVersion] = version }
 
     private fun Int.toTime(): LocalTime = LocalTime.of(this / 60, this % 60)
 }

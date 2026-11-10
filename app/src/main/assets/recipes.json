@@ -1,0 +1,1315 @@
+{
+ "version": 1,
+ "note": "Công thức cho 7 người, kiểu miền Bắc. Mẹ sửa được trong app.",
+ "servings": 7,
+ "recipes": [
+  {
+   "dishId": "thit_ba_chi_rang_chay_canh",
+   "ingredients": [
+    "700g thịt ba chỉ",
+    "3 củ hành khô",
+    "1 thìa nước mắm",
+    "1 thìa đường",
+    "Hạt tiêu, hành lá"
+   ],
+   "steps": [
+    "Thịt rửa sạch, chần qua nước sôi, thái miếng mỏng vừa ăn.",
+    "Ướp thịt với 1 củ hành băm, nước mắm, đường, tiêu khoảng 15 phút.",
+    "Cho thịt vào chảo nóng không cần dầu, đảo đều cho thịt ra mỡ.",
+    "Rang lửa vừa đến khi các cạnh thịt cháy vàng, đổ bớt mỡ thừa.",
+    "Cho hành khô thái lát vào đảo thơm, nêm lại, rắc hành lá và tiêu rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "thit_kho_trung",
+   "ingredients": [
+    "800g thịt ba chỉ",
+    "10 quả trứng (gà hoặc vịt)",
+    "1 quả dừa xiêm (hoặc 500ml nước lọc)",
+    "3 thìa nước mắm",
+    "2 thìa đường",
+    "Hành khô, tỏi, tiêu"
+   ],
+   "steps": [
+    "Trứng luộc chín, bóc vỏ.",
+    "Thịt thái miếng vuông 3cm, ướp nước mắm, hành tỏi băm, tiêu 20 phút.",
+    "Thắng đường thành nước màu cánh gián, cho thịt vào đảo cho săn và lên màu.",
+    "Đổ nước dừa (hoặc nước lọc) ngập thịt, đun sôi, hớt bọt.",
+    "Cho trứng vào, hạ nhỏ lửa kho 40–45 phút đến khi thịt mềm, nước sánh. Nêm lại cho vừa."
+   ]
+  },
+  {
+   "dishId": "thit_luoc_mam_tom",
+   "ingredients": [
+    "1kg thịt ba chỉ (hoặc thịt chân giò)",
+    "1 củ gừng",
+    "2 củ hành khô",
+    "Mắm tôm, 1 quả chanh, ớt, đường",
+    "Rau thơm ăn kèm"
+   ],
+   "steps": [
+    "Thịt cạo sạch bì, rửa với nước muối loãng.",
+    "Đun nồi nước với gừng đập dập và hành khô nướng, nước sôi thì thả thịt vào.",
+    "Luộc lửa vừa 25–30 phút, xiên đũa không thấy nước hồng là chín.",
+    "Vớt thịt ngâm ngay vào bát nước đun sôi để nguội cho thịt trắng, giòn bì.",
+    "Pha mắm tôm với chút đường, vắt chanh, ớt, đánh cho sủi bọt. Thái thịt mỏng bày đĩa."
+   ]
+  },
+  {
+   "dishId": "tom_rang_thit",
+   "ingredients": [
+    "400g tôm",
+    "300g thịt ba chỉ",
+    "2 thìa nước mắm",
+    "1 thìa đường",
+    "Hành khô, hành lá, tiêu"
+   ],
+   "steps": [
+    "Tôm cắt râu, rửa sạch, để ráo. Thịt thái miếng mỏng.",
+    "Cho thịt vào chảo rang cho ra mỡ và hơi vàng.",
+    "Cho hành khô băm vào phi thơm rồi cho tôm vào đảo đều.",
+    "Nêm nước mắm, đường, rang lửa vừa đến khi tôm đỏ, săn và thấm.",
+    "Rắc hành lá, tiêu, đảo đều rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "cha_la_lot",
+   "ingredients": [
+    "600g thịt băm (nửa nạc nửa mỡ)",
+    "50 lá lốt",
+    "3 củ hành khô, 1 nhánh tỏi",
+    "1 thìa nước mắm, 1 thìa hạt nêm",
+    "Tiêu, dầu ăn"
+   ],
+   "steps": [
+    "Lá lốt rửa sạch, để ráo, cắt bỏ cuống. Thái nhỏ vài lá trộn vào thịt.",
+    "Trộn thịt băm với hành tỏi băm, nước mắm, hạt nêm, tiêu, để 15 phút.",
+    "Đặt lá lốt mặt bóng xuống dưới, cho một thìa nhân, cuộn chặt tay.",
+    "Xếp chả vào chảo dầu nóng, mép cuộn quay xuống dưới để không bung.",
+    "Rán lửa vừa, lật đều đến khi chả chín vàng hai mặt."
+   ]
+  },
+  {
+   "dishId": "trung_duc_thit",
+   "ingredients": [
+    "8 quả trứng gà",
+    "250g thịt băm",
+    "2 củ hành khô, hành lá",
+    "1 thìa nước mắm",
+    "Tiêu, dầu ăn"
+   ],
+   "steps": [
+    "Phi thơm hành khô, xào thịt băm cho tơi và săn, nêm chút nước mắm.",
+    "Đập trứng vào bát, thêm nước mắm, tiêu, hành lá, đánh tan.",
+    "Cho thịt đã xào vào bát trứng, trộn đều.",
+    "Đun nóng chảo dầu, đổ trứng vào, dàn đều, để lửa nhỏ.",
+    "Khi mặt dưới vàng thì lật (hoặc úp đĩa lật), rán tiếp đến khi chín. Cắt miếng."
+   ]
+  },
+  {
+   "dishId": "suon_xao_chua_ngot",
+   "ingredients": [
+    "1kg sườn non",
+    "2 thìa giấm (hoặc nước cốt chanh)",
+    "3 thìa đường",
+    "2 thìa nước mắm, 1 thìa tương cà",
+    "Hành khô, tỏi, hành lá"
+   ],
+   "steps": [
+    "Sườn chặt miếng vừa ăn, chần nước sôi có chút muối rồi rửa sạch.",
+    "Ướp sườn với hành tỏi băm, nước mắm, chút đường 20 phút.",
+    "Rán sườn trong chảo dầu đến khi vàng các mặt, vớt ra.",
+    "Pha nước sốt: giấm, đường, nước mắm, tương cà, nửa bát nước.",
+    "Phi tỏi, cho sườn vào, đổ nước sốt, đảo lửa vừa đến khi sốt sánh bám đều. Rắc hành lá."
+   ]
+  },
+  {
+   "dishId": "suon_rim",
+   "ingredients": [
+    "1kg sườn non",
+    "3 thìa nước mắm",
+    "2 thìa đường",
+    "Hành khô, tỏi, tiêu",
+    "Hành lá"
+   ],
+   "steps": [
+    "Sườn chặt miếng, chần qua nước sôi, rửa sạch.",
+    "Ướp sườn với nước mắm, hành tỏi băm, tiêu 20 phút.",
+    "Phi thơm hành tỏi, cho sườn vào rán săn và hơi vàng.",
+    "Thêm đường và nửa bát nước, đun lửa nhỏ, thỉnh thoảng đảo.",
+    "Rim đến khi nước cạn, sườn bóng màu cánh gián. Rắc tiêu, hành lá."
+   ]
+  },
+  {
+   "dishId": "chan_gio_luoc",
+   "ingredients": [
+    "1 chân giò trước (khoảng 1,2kg)",
+    "1 củ gừng",
+    "2 củ hành khô",
+    "Muối",
+    "Nước mắm, chanh, ớt để chấm"
+   ],
+   "steps": [
+    "Chân giò cạo sạch lông, rửa với muối, có thể nhờ chặt đôi cho dễ luộc.",
+    "Chần qua nước sôi rồi đổ nước đi, rửa lại.",
+    "Cho vào nồi nước mới với gừng đập dập, hành nướng, chút muối.",
+    "Đun sôi rồi hạ lửa vừa, luộc 45–50 phút đến khi xiên đũa không thấy nước hồng.",
+    "Vớt ra ngâm nước đun sôi để nguội cho bì giòn, để ráo, thái mỏng. Chấm nước mắm chanh ớt."
+   ]
+  },
+  {
+   "dishId": "thit_dong",
+   "ingredients": [
+    "1 chân giò (khoảng 1kg)",
+    "500g thịt nạc vai",
+    "100g mộc nhĩ",
+    "1 củ hành tây, hành khô",
+    "3 thìa nước mắm, hạt tiêu"
+   ],
+   "steps": [
+    "Chân giò và thịt nạc thái miếng vừa, chần qua nước sôi rồi rửa sạch.",
+    "Ướp thịt với nước mắm, hành khô băm, tiêu 30 phút. Mộc nhĩ ngâm nở, thái sợi.",
+    "Phi thơm hành, cho thịt vào xào săn, đổ nước xâm xấp, đun sôi và hớt bọt kỹ.",
+    "Hạ lửa thật nhỏ, ninh khoảng 1,5 tiếng đến khi bì mềm, nước trong. Cho mộc nhĩ vào trước khi tắt bếp 5 phút.",
+    "Múc ra bát, để nguội rồi cho vào ngăn mát tủ lạnh qua đêm cho đông. Ăn kèm dưa hành."
+   ]
+  },
+  {
+   "dishId": "gia_cay",
+   "ingredients": [
+    "1,2kg chân giò",
+    "1 bát mẻ",
+    "2 thìa mắm tôm",
+    "1 củ riềng, 1 củ nghệ (hoặc bột nghệ)",
+    "5 cây sả, hành khô, tỏi",
+    "Nước mắm, đường"
+   ],
+   "steps": [
+    "Chân giò thui vàng bì (hoặc khò), cạo sạch, chặt miếng vừa ăn.",
+    "Riềng, nghệ giã nhỏ; lọc mẻ bỏ bã; sả đập dập thái khúc.",
+    "Ướp thịt với riềng, nghệ, mẻ, mắm tôm, nước mắm, chút đường ít nhất 1 tiếng.",
+    "Phi thơm hành tỏi sả, cho thịt vào xào săn, đổ nước xâm xấp.",
+    "Đun sôi rồi hạ nhỏ lửa om 60 phút đến khi thịt mềm, nước sánh. Nêm lại, rắc lá lốt hoặc tía tô thái chỉ."
+   ]
+  },
+  {
+   "dishId": "thit_kho_dua",
+   "ingredients": [
+    "600g thịt ba chỉ",
+    "500g dưa cải chua",
+    "2 quả cà chua",
+    "2 thìa nước mắm, 1 thìa đường",
+    "Hành khô, hành lá"
+   ],
+   "steps": [
+    "Dưa cải rửa lại, vắt ráo, thái khúc. Thịt thái miếng vừa ăn.",
+    "Ướp thịt với nước mắm, hành khô băm 15 phút.",
+    "Rang thịt cho săn và ra bớt mỡ, cho cà chua thái múi vào đảo nhừ.",
+    "Cho dưa vào đảo đều, thêm chút đường, nửa bát nước.",
+    "Kho lửa nhỏ 25–30 phút đến khi thịt mềm, dưa thấm. Rắc hành lá."
+   ]
+  },
+  {
+   "dishId": "thit_vien_sot_ca_chua",
+   "ingredients": [
+    "700g thịt băm",
+    "5 quả cà chua",
+    "1 quả trứng",
+    "2 thìa nước mắm, 1 thìa đường",
+    "Hành khô, hành lá, tiêu"
+   ],
+   "steps": [
+    "Trộn thịt băm với trứng, hành khô băm, nước mắm, tiêu, nhồi kỹ cho dẻo.",
+    "Vo thành viên tròn cỡ quả cau.",
+    "Rán viên thịt trong chảo dầu đến khi vàng đều, vớt ra.",
+    "Phi hành, cho cà chua thái nhỏ vào xào nhừ, thêm đường, chút nước mắm và nửa bát nước.",
+    "Thả thịt viên vào sốt, đun lửa nhỏ 10 phút cho thấm. Rắc hành lá."
+   ]
+  },
+  {
+   "dishId": "nem_ran",
+   "ingredients": [
+    "500g thịt băm",
+    "1 củ cà rốt, 1 bó miến nhỏ, 30g mộc nhĩ",
+    "2 quả trứng",
+    "200g giá đỗ, hành lá",
+    "1 tập bánh đa nem",
+    "Nước mắm, tiêu; nước chấm chua ngọt"
+   ],
+   "steps": [
+    "Miến, mộc nhĩ ngâm nở rồi cắt nhỏ; cà rốt thái sợi; giá cắt khúc, vắt ráo.",
+    "Trộn tất cả với thịt, trứng, hành lá, nước mắm, tiêu cho thật đều.",
+    "Làm ẩm bánh đa nem, cho nhân, gấp hai mép rồi cuộn chặt tay.",
+    "Cho nem vào chảo dầu còn nguội, bật lửa vừa, rán đến khi vàng giòn đều.",
+    "Ăn kèm rau sống, bún và nước mắm pha chua ngọt có su hào, cà rốt."
+   ]
+  },
+  {
+   "dishId": "ga_luoc_la_chanh",
+   "ingredients": [
+    "1 con gà ta (khoảng 1,5kg)",
+    "1 củ gừng, 2 củ hành khô",
+    "20 lá chanh",
+    "Muối, tiêu, chanh để chấm"
+   ],
+   "steps": [
+    "Gà làm sạch, xát muối và gừng, rửa lại cho hết mùi.",
+    "Cho gà vào nồi nước nguội ngập, thêm gừng đập dập, hành nướng, chút muối.",
+    "Đun sôi rồi hạ lửa nhỏ 15 phút, tắt bếp đậy vung ngâm thêm 15 phút cho chín đều, da không nứt.",
+    "Vớt gà ngâm nước lạnh 2 phút cho da vàng giòn, để ráo, chặt miếng.",
+    "Bày đĩa, rắc lá chanh thái chỉ. Chấm muối tiêu chanh."
+   ]
+  },
+  {
+   "dishId": "ga_rang_gung",
+   "ingredients": [
+    "1kg thịt gà",
+    "1 củ gừng to",
+    "2 thìa nước mắm, 1 thìa đường",
+    "Hành khô, tỏi, tiêu"
+   ],
+   "steps": [
+    "Gà chặt miếng vừa ăn, rửa sạch, để ráo.",
+    "Gừng nửa giã nhỏ, nửa thái sợi. Ướp gà với gừng giã, nước mắm, hành tỏi băm 20 phút.",
+    "Phi thơm tỏi, cho gà vào đảo lửa to cho săn.",
+    "Thêm đường, hạ lửa vừa, rang đến khi gà chín, cạn nước và hơi cháy cạnh.",
+    "Cho gừng thái sợi vào đảo thơm, rắc tiêu rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "ga_kho_sa",
+   "ingredients": [
+    "1kg thịt gà",
+    "6 cây sả",
+    "2 thìa nước mắm, 1 thìa đường",
+    "Hành khô, tỏi, ớt"
+   ],
+   "steps": [
+    "Gà chặt miếng, rửa sạch. Sả nửa băm nhỏ, nửa đập dập cắt khúc.",
+    "Ướp gà với sả băm, hành tỏi, nước mắm, đường 20 phút.",
+    "Phi thơm sả khúc và tỏi, cho gà vào đảo săn.",
+    "Thêm nửa bát nước, đậy vung kho lửa nhỏ 20 phút.",
+    "Mở vung đun đến khi nước sệt lại bám vào thịt. Thêm ớt nếu thích."
+   ]
+  },
+  {
+   "dishId": "vit_om_sau",
+   "ingredients": [
+    "1 con vịt (khoảng 2kg)",
+    "300g quả sấu",
+    "1 củ gừng, 3 cây sả",
+    "3 thìa nước mắm",
+    "Hành khô, tỏi, rau răm"
+   ],
+   "steps": [
+    "Vịt làm sạch, xát gừng và rượu (hoặc muối) cho hết mùi, chặt miếng.",
+    "Ướp vịt với hành tỏi băm, gừng, nước mắm 30 phút. Sấu gọt vỏ, đập dập.",
+    "Phi thơm hành tỏi sả, cho vịt vào xào săn.",
+    "Đổ nước xâm xấp, cho sấu vào, đun sôi rồi hạ lửa om 40 phút.",
+    "Khi thịt mềm, sấu nhừ, nêm lại cho vừa chua mặn. Rắc rau răm."
+   ]
+  },
+  {
+   "dishId": "vit_luoc_mam_gung",
+   "ingredients": [
+    "1 con vịt (khoảng 2kg)",
+    "1 củ gừng to",
+    "2 củ hành khô",
+    "Muối, nước mắm, đường, chanh, ớt"
+   ],
+   "steps": [
+    "Vịt làm sạch, xát muối và gừng rồi rửa lại cho hết mùi hôi.",
+    "Cho vịt vào nồi nước ngập, thêm gừng, hành nướng, chút muối.",
+    "Đun sôi, hớt bọt, hạ lửa vừa luộc 40–45 phút.",
+    "Xiên đũa vào đùi không thấy nước hồng là chín, vớt ra để ráo rồi chặt miếng.",
+    "Mắm gừng: gừng giã nhỏ trộn nước mắm, đường, chanh, ớt."
+   ]
+  },
+  {
+   "dishId": "ca_kho_rieng",
+   "ingredients": [
+    "1 con cá trắm (khoảng 1,2kg)",
+    "1 củ riềng to",
+    "100g thịt ba chỉ (lót nồi)",
+    "4 thìa nước mắm, 2 thìa đường",
+    "Hành khô, ớt, tiêu"
+   ],
+   "steps": [
+    "Cá làm sạch, khứa khúc dày 3cm, xát muối rửa cho hết nhớt, để ráo.",
+    "Riềng nửa giã nhỏ, nửa thái lát. Ướp cá với riềng giã, hành, nước mắm, đường, tiêu ít nhất 1 tiếng.",
+    "Lót riềng lát và thịt ba chỉ dưới đáy nồi, xếp cá lên trên.",
+    "Đổ nước ngập mặt cá, đun sôi rồi hạ lửa thật nhỏ kho 1 tiếng trở lên.",
+    "Kho đến khi nước sánh lại, cá săn chắc, xương mềm. Rắc tiêu, ớt."
+   ]
+  },
+  {
+   "dishId": "ca_ro_phi_ran",
+   "ingredients": [
+    "3 con cá rô phi (khoảng 1,5kg)",
+    "Muối",
+    "Dầu ăn",
+    "Nước mắm, tỏi, ớt, chanh để chấm"
+   ],
+   "steps": [
+    "Cá làm sạch, khứa vài đường hai bên thân.",
+    "Xát muối, để ráo hoặc thấm khô bằng giấy để rán không bắn dầu.",
+    "Đun dầu thật nóng, thả cá vào rán lửa vừa.",
+    "Không lật sớm; khi mặt dưới vàng giòn mới lật mặt kia.",
+    "Vớt ra để ráo dầu. Chấm nước mắm tỏi ớt."
+   ]
+  },
+  {
+   "dishId": "ca_dieu_hong_sot_ca_chua",
+   "ingredients": [
+    "2 con cá diêu hồng (khoảng 1,5kg)",
+    "5 quả cà chua",
+    "2 thìa nước mắm, 1 thìa đường",
+    "Hành khô, hành lá, thì là"
+   ],
+   "steps": [
+    "Cá làm sạch, khứa thân, xát muối, để ráo.",
+    "Rán cá vàng giòn hai mặt, để ra đĩa.",
+    "Phi thơm hành, cho cà chua thái nhỏ xào nhừ, nêm nước mắm, đường, thêm chút nước.",
+    "Rưới sốt lên cá (hoặc cho cá vào chảo sốt), đun lửa nhỏ 5 phút cho thấm.",
+    "Rắc hành lá, thì là."
+   ]
+  },
+  {
+   "dishId": "ca_thu_sot_ca_chua",
+   "ingredients": [
+    "1kg cá thu cắt khúc",
+    "5 quả cà chua",
+    "2 thìa nước mắm, 1 thìa đường",
+    "Hành khô, hành lá, tiêu"
+   ],
+   "steps": [
+    "Cá rửa sạch, thấm khô, ướp chút muối và tiêu 10 phút.",
+    "Rán cá vàng hai mặt, vớt ra.",
+    "Phi thơm hành, cho cà chua thái nhỏ xào nhừ, nêm nước mắm, đường, thêm nửa bát nước.",
+    "Cho cá vào chảo sốt, đun lửa nhỏ 10 phút, thỉnh thoảng rưới sốt lên cá.",
+    "Rắc hành lá, tiêu."
+   ]
+  },
+  {
+   "dishId": "ca_nuc_kho",
+   "ingredients": [
+    "1kg cá nục",
+    "100g thịt ba chỉ",
+    "3 thìa nước mắm, 1 thìa đường",
+    "Hành khô, tỏi, ớt, tiêu",
+    "Nước màu"
+   ],
+   "steps": [
+    "Cá nục bỏ ruột, rửa nước muối, để ráo.",
+    "Ướp cá với nước mắm, hành tỏi băm, đường, nước màu, tiêu 30 phút.",
+    "Lót thịt ba chỉ dưới nồi, xếp cá lên trên.",
+    "Đổ nước xâm xấp, đun sôi rồi hạ lửa nhỏ kho 40–45 phút.",
+    "Kho đến khi nước cạn sánh, cá săn. Thêm ớt."
+   ]
+  },
+  {
+   "dishId": "ca_kho_chuoi_dau",
+   "ingredients": [
+    "1kg cá trắm",
+    "4 quả chuối xanh",
+    "4 bìa đậu phụ",
+    "100g thịt ba chỉ",
+    "1 bát mẻ, 1 củ nghệ, 1 củ riềng",
+    "Mắm tôm, nước mắm, tía tô, lá lốt"
+   ],
+   "steps": [
+    "Cá cắt khúc, rán sơ cho săn. Đậu cắt miếng rán vàng. Thịt thái miếng mỏng.",
+    "Chuối gọt vỏ, cắt khúc, ngâm nước muối pha chút giấm cho khỏi thâm.",
+    "Nghệ, riềng giã nhỏ; lọc mẻ. Phi hành, xào thịt và chuối với nghệ cho săn.",
+    "Cho cá, đậu, mẻ, riềng, chút mắm tôm và nước mắm vào, đổ nước xâm xấp.",
+    "Om lửa nhỏ 60–90 phút đến khi chuối mềm, nước sánh. Rắc tía tô, lá lốt thái chỉ."
+   ]
+  },
+  {
+   "dishId": "ca_chep_om_dua",
+   "ingredients": [
+    "1 con cá chép (khoảng 1,2kg)",
+    "500g dưa cải chua",
+    "3 quả cà chua",
+    "Gừng, hành khô, thì là, hành lá",
+    "2 thìa nước mắm"
+   ],
+   "steps": [
+    "Cá làm sạch, cắt khúc, ướp muối và gừng 10 phút rồi rán sơ cho săn.",
+    "Dưa rửa lại, vắt ráo, thái khúc. Cà chua thái múi.",
+    "Phi hành, xào cà chua nhừ, cho dưa vào đảo đều.",
+    "Xếp cá lên, đổ nước xâm xấp, nêm nước mắm, om lửa nhỏ 20 phút.",
+    "Nêm lại cho vừa chua mặn, rắc thì là và hành lá."
+   ]
+  },
+  {
+   "dishId": "tep_rang_la_chanh",
+   "ingredients": [
+    "500g tép",
+    "10 lá chanh",
+    "1 thìa nước mắm, 1 thìa đường",
+    "Hành khô, ớt"
+   ],
+   "steps": [
+    "Tép rửa sạch, nhặt bỏ rác, để thật ráo.",
+    "Lá chanh rửa sạch, thái chỉ.",
+    "Cho tép vào chảo nóng rang khô, sau đó thêm chút dầu và hành khô băm.",
+    "Nêm nước mắm, đường, rang lửa vừa đến khi tép đỏ giòn và khô.",
+    "Cho lá chanh, ớt vào đảo đều rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "tom_rim",
+   "ingredients": [
+    "800g tôm",
+    "2 thìa nước mắm, 1 thìa đường",
+    "Hành khô, tỏi, hành lá, tiêu"
+   ],
+   "steps": [
+    "Tôm cắt râu và chân, rửa sạch, để ráo.",
+    "Ướp tôm với nước mắm, đường, tỏi băm 10 phút.",
+    "Phi thơm hành tỏi, cho tôm vào đảo lửa to.",
+    "Hạ lửa vừa, rim đến khi tôm đỏ đều, nước sệt lại bám vỏ.",
+    "Rắc hành lá, tiêu."
+   ]
+  },
+  {
+   "dishId": "cha_ca_ran",
+   "ingredients": [
+    "700g chả cá (mua sẵn)",
+    "Dầu ăn",
+    "Thì là, hành lá (nếu tự trộn thêm)",
+    "Tương ớt hoặc nước mắm chanh để chấm"
+   ],
+   "steps": [
+    "Nếu chả cá chưa có rau, trộn thêm thì là và hành lá thái nhỏ.",
+    "Dùng tay hoặc thìa thấm dầu nặn chả thành miếng dẹt dày khoảng 1cm.",
+    "Đun dầu vừa nóng, rán chả lửa vừa.",
+    "Lật khi mặt dưới vàng, rán đến khi chả phồng và vàng đều.",
+    "Vớt ra để ráo dầu, cắt miếng. Chấm tương ớt hoặc nước mắm chanh."
+   ]
+  },
+  {
+   "dishId": "dau_phu_sot_ca_chua",
+   "ingredients": [
+    "8 bìa đậu phụ",
+    "5 quả cà chua",
+    "1 thìa nước mắm, 1 thìa đường",
+    "Hành khô, hành lá"
+   ],
+   "steps": [
+    "Đậu cắt miếng vừa ăn, rán vàng (hoặc để nguyên không rán nếu thích mềm).",
+    "Phi thơm hành, cho cà chua thái nhỏ vào xào nhừ.",
+    "Nêm nước mắm, đường, thêm nửa bát nước cho thành sốt.",
+    "Cho đậu vào, đun lửa nhỏ 5–7 phút cho thấm, thỉnh thoảng rưới sốt.",
+    "Rắc hành lá rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "dau_phu_nhoi_thit",
+   "ingredients": [
+    "8 bìa đậu phụ",
+    "300g thịt băm",
+    "5 quả cà chua",
+    "20g mộc nhĩ",
+    "Hành khô, hành lá, nước mắm, tiêu"
+   ],
+   "steps": [
+    "Mộc nhĩ ngâm nở, băm nhỏ, trộn với thịt, hành băm, nước mắm, tiêu.",
+    "Đậu cắt đôi thành miếng tam giác hoặc vuông, khoét một đường ở giữa, nhồi thịt vào.",
+    "Rán đậu cho vàng các mặt, mặt có thịt rán trước cho chín nhân.",
+    "Phi hành, xào cà chua nhừ, nêm nước mắm, chút đường và nửa bát nước.",
+    "Cho đậu vào sốt, đun lửa nhỏ 10 phút cho thấm. Rắc hành lá."
+   ]
+  },
+  {
+   "dishId": "dau_ran_mam_tom",
+   "ingredients": [
+    "8 bìa đậu phụ",
+    "Dầu ăn",
+    "Mắm tôm, chanh, ớt, đường",
+    "Lá tía tô, kinh giới"
+   ],
+   "steps": [
+    "Đậu để ráo nước, cắt miếng vừa ăn.",
+    "Đun dầu nóng già, thả đậu vào rán.",
+    "Rán lửa vừa, lật đều đến khi vàng giòn bên ngoài.",
+    "Vớt ra giấy thấm dầu.",
+    "Pha mắm tôm với chút đường, vắt chanh, ớt, đánh sủi bọt. Ăn kèm rau thơm."
+   ]
+  },
+  {
+   "dishId": "dau_ran_tam_hanh",
+   "ingredients": [
+    "8 bìa đậu phụ",
+    "1 bó hành lá",
+    "2 thìa nước mắm, 1 thìa đường",
+    "Dầu ăn, tiêu"
+   ],
+   "steps": [
+    "Đậu cắt miếng, rán vàng giòn, xếp ra đĩa.",
+    "Hành lá thái nhỏ.",
+    "Đun ít dầu, cho hành lá vào phi qua cho thơm.",
+    "Thêm nước mắm, đường, 3 thìa nước, đun sôi thành nước sốt.",
+    "Rưới nước hành lên đậu, rắc tiêu."
+   ]
+  },
+  {
+   "dishId": "trung_ran",
+   "ingredients": [
+    "10 quả trứng",
+    "Hành lá",
+    "1 thìa nước mắm",
+    "Tiêu, dầu ăn"
+   ],
+   "steps": [
+    "Đập trứng vào bát, thêm nước mắm, tiêu.",
+    "Hành lá thái nhỏ cho vào, đánh tan đều.",
+    "Đun nóng chảo với chút dầu, đổ trứng vào, dàn mỏng.",
+    "Để lửa vừa, khi mặt dưới vàng thì lật hoặc gập đôi.",
+    "Rán thêm 1 phút, cắt miếng bày đĩa."
+   ]
+  },
+  {
+   "dishId": "trung_hap_van",
+   "ingredients": [
+    "8 quả trứng",
+    "200g thịt băm",
+    "20g mộc nhĩ, 1 nắm miến",
+    "Hành lá, nước mắm, tiêu"
+   ],
+   "steps": [
+    "Mộc nhĩ, miến ngâm nở, cắt nhỏ.",
+    "Trộn thịt băm với mộc nhĩ, miến, nước mắm, tiêu.",
+    "Tách riêng 2 lòng đỏ để quét mặt. Đánh 6 quả trứng còn lại với hỗn hợp thịt và hành lá.",
+    "Đổ vào bát tô, hấp cách thủy 20 phút.",
+    "Quét lòng đỏ lên mặt, hấp thêm 5 phút cho mặt vàng đẹp."
+   ]
+  },
+  {
+   "dishId": "ca_bung",
+   "ingredients": [
+    "1kg cà tím",
+    "4 bìa đậu phụ",
+    "100g thịt ba chỉ",
+    "2 quả cà chua",
+    "Mẻ, mắm tôm, tía tô, lá lốt, hành khô"
+   ],
+   "steps": [
+    "Cà tím cắt khúc, ngâm nước muối 15 phút cho khỏi thâm, vớt ra để ráo.",
+    "Đậu cắt miếng rán vàng; thịt thái miếng nhỏ.",
+    "Phi hành, xào thịt săn, cho cà chua vào xào nhừ.",
+    "Cho cà tím, đậu, mẻ lọc, chút mắm tôm vào, thêm nước xâm xấp, om lửa nhỏ 20–25 phút.",
+    "Khi cà mềm nhừ, nêm lại, rắc tía tô và lá lốt thái chỉ."
+   ]
+  },
+  {
+   "dishId": "rau_muong_xao_toi",
+   "ingredients": [
+    "2 bó rau muống",
+    "1 củ tỏi",
+    "Hạt nêm hoặc nước mắm",
+    "Dầu ăn"
+   ],
+   "steps": [
+    "Rau muống nhặt lấy ngọn và lá non, rửa sạch, để thật ráo.",
+    "Chần rau qua nước sôi 30 giây rồi vớt ra ngâm nước lạnh cho xanh (có thể bỏ qua).",
+    "Phi thơm tỏi đập dập với dầu nóng.",
+    "Cho rau vào đảo nhanh tay trên lửa to.",
+    "Nêm hạt nêm hoặc chút nước mắm, đảo đều khoảng 2 phút là được."
+   ]
+  },
+  {
+   "dishId": "bap_cai_xao_ca_chua",
+   "ingredients": [
+    "1 cái bắp cải (khoảng 800g)",
+    "3 quả cà chua",
+    "Hành khô, hành lá",
+    "Nước mắm, chút đường"
+   ],
+   "steps": [
+    "Bắp cải rửa sạch, thái miếng vừa ăn. Cà chua thái múi cau.",
+    "Phi thơm hành khô, cho cà chua vào xào mềm.",
+    "Cho bắp cải vào đảo đều trên lửa to.",
+    "Nêm nước mắm và chút đường, đảo đến khi bắp cải vừa chín tới, còn giòn.",
+    "Rắc hành lá rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "su_su_xao_toi",
+   "ingredients": [
+    "4 quả su su",
+    "1 củ tỏi",
+    "Hạt nêm hoặc nước mắm",
+    "Dầu ăn"
+   ],
+   "steps": [
+    "Su su gọt vỏ (đeo găng hoặc gọt dưới vòi nước để khỏi nhựa), bổ đôi bỏ hạt, thái lát.",
+    "Phi thơm tỏi băm.",
+    "Cho su su vào đảo lửa to.",
+    "Thêm 2 thìa nước, đảo đến khi su su chín tới, trong.",
+    "Nêm hạt nêm cho vừa rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "do_xao_thit",
+   "ingredients": [
+    "600g đỗ cô ve",
+    "250g thịt nạc vai",
+    "1 củ tỏi",
+    "Nước mắm, hạt nêm, tiêu"
+   ],
+   "steps": [
+    "Đỗ tước xơ, rửa sạch, thái chéo. Thịt thái mỏng, ướp nước mắm và tỏi băm.",
+    "Chần đỗ qua nước sôi có chút muối 1 phút cho xanh, vớt ra.",
+    "Phi tỏi, xào thịt chín săn, múc ra.",
+    "Cho đỗ vào xào lửa to 2 phút, cho thịt vào lại.",
+    "Nêm hạt nêm, tiêu, đảo đều rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "bo_xao_can_toi",
+   "ingredients": [
+    "400g thịt bò thăn",
+    "1 bó cần tây",
+    "1 bó tỏi tây (tỏi lá)",
+    "1 củ tỏi, gừng",
+    "Nước mắm, dầu hào, tiêu"
+   ],
+   "steps": [
+    "Thịt bò thái mỏng ngang thớ, ướp tỏi băm, gừng, dầu hào, chút dầu ăn 15 phút.",
+    "Cần tây và tỏi tây rửa sạch, cắt khúc 4cm.",
+    "Phi tỏi, cho bò vào xào thật nhanh trên lửa to đến khi tái, múc ra.",
+    "Cho cần và tỏi tây vào xào 1–2 phút, nêm chút nước mắm.",
+    "Cho bò vào lại, đảo đều 30 giây, rắc tiêu rồi tắt bếp (xào lâu bò sẽ dai)."
+   ]
+  },
+  {
+   "dishId": "bo_xao_sup_lo",
+   "ingredients": [
+    "400g thịt bò thăn",
+    "2 cây súp lơ xanh (hoặc trắng)",
+    "1 củ cà rốt",
+    "Tỏi, dầu hào, nước mắm, tiêu"
+   ],
+   "steps": [
+    "Bò thái mỏng, ướp tỏi băm, dầu hào, chút dầu ăn.",
+    "Súp lơ cắt miếng nhỏ, ngâm nước muối, chần qua nước sôi. Cà rốt thái lát.",
+    "Xào bò lửa to đến khi tái, múc ra.",
+    "Xào súp lơ và cà rốt với tỏi, thêm chút nước cho chín tới.",
+    "Cho bò vào lại, nêm nước mắm, đảo nhanh, rắc tiêu."
+   ]
+  },
+  {
+   "dishId": "khoai_tay_xao_bo",
+   "ingredients": [
+    "600g khoai tây",
+    "300g thịt bò",
+    "1 củ hành tây",
+    "Tỏi, nước mắm, dầu hào, tiêu"
+   ],
+   "steps": [
+    "Khoai tây gọt vỏ, thái sợi hoặc lát mỏng, ngâm nước cho bớt bột rồi để ráo.",
+    "Bò thái mỏng, ướp tỏi, dầu hào.",
+    "Xào khoai tây với chút dầu đến khi chín vàng, múc ra.",
+    "Xào bò lửa to đến khi tái, cho hành tây thái múi vào đảo.",
+    "Cho khoai vào lại, nêm nước mắm, tiêu, đảo đều."
+   ]
+  },
+  {
+   "dishId": "dua_cai_xao_thit",
+   "ingredients": [
+    "500g dưa cải chua",
+    "300g thịt ba chỉ",
+    "2 quả cà chua",
+    "Hành khô, hành lá, nước mắm, chút đường"
+   ],
+   "steps": [
+    "Dưa rửa lại, vắt ráo, thái khúc. Thịt thái mỏng.",
+    "Rang thịt cho ra mỡ, cho hành khô vào phi thơm.",
+    "Cho cà chua thái múi xào mềm.",
+    "Cho dưa vào xào lửa to 5 phút, nêm nước mắm, chút đường.",
+    "Rắc hành lá, đảo đều rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "muop_xao_long_ga",
+   "ingredients": [
+    "3 quả mướp",
+    "400g lòng mề gà",
+    "Gừng, tỏi, hành lá",
+    "Nước mắm, tiêu"
+   ],
+   "steps": [
+    "Lòng mề làm sạch bằng muối và gừng, rửa kỹ, thái miếng mỏng.",
+    "Mướp gọt vỏ, cắt miếng vát.",
+    "Phi tỏi, xào lòng mề lửa to với chút nước mắm và gừng đến khi chín, múc ra.",
+    "Xào mướp với chút dầu đến khi mềm.",
+    "Cho lòng mề vào lại, nêm vừa, rắc hành lá và tiêu."
+   ]
+  },
+  {
+   "dishId": "gia_xao",
+   "ingredients": [
+    "600g giá đỗ",
+    "1 bó hẹ hoặc hành lá",
+    "Tỏi, hạt nêm",
+    "Dầu ăn"
+   ],
+   "steps": [
+    "Giá nhặt bỏ vỏ đỗ, rửa sạch, để ráo.",
+    "Hẹ hoặc hành lá cắt khúc.",
+    "Phi thơm tỏi trên lửa to.",
+    "Cho giá vào đảo nhanh 1–2 phút, giá còn giòn là được.",
+    "Cho hẹ vào, nêm hạt nêm, đảo đều rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "muc_xao_can_toi",
+   "ingredients": [
+    "600g mực tươi",
+    "1 bó cần tây",
+    "1 bó tỏi tây",
+    "1 quả cà chua, 1 củ hành tây",
+    "Gừng, tỏi, nước mắm, tiêu"
+   ],
+   "steps": [
+    "Mực làm sạch, bỏ túi mực, khứa vảy rồng, cắt miếng. Bóp với gừng và chút rượu cho hết tanh.",
+    "Cần, tỏi tây cắt khúc; cà chua, hành tây thái múi.",
+    "Phi tỏi, xào mực lửa thật to 1–2 phút đến khi cong lại, múc ra.",
+    "Xào cà chua, hành tây, cần, tỏi tây cho chín tới.",
+    "Cho mực vào lại, nêm nước mắm, tiêu, đảo nhanh rồi tắt bếp (xào lâu mực sẽ dai)."
+   ]
+  },
+  {
+   "dishId": "mang_xao_thit",
+   "ingredients": [
+    "600g măng tươi (hoặc măng ngâm)",
+    "300g thịt ba chỉ",
+    "Tỏi, hành lá",
+    "Nước mắm, hạt nêm, tiêu"
+   ],
+   "steps": [
+    "Măng thái mỏng, luộc 2–3 lần, mỗi lần đổ nước đi cho hết đắng và độc tố.",
+    "Thịt thái mỏng, ướp nước mắm và tỏi.",
+    "Rang thịt cho săn, ra mỡ.",
+    "Cho măng vào xào lửa to 5 phút, thêm chút nước cho thấm.",
+    "Nêm hạt nêm, rắc hành lá và tiêu."
+   ]
+  },
+  {
+   "dishId": "muop_dang_xao_trung",
+   "ingredients": [
+    "3 quả mướp đắng",
+    "5 quả trứng",
+    "Tỏi, hành lá",
+    "Nước mắm, tiêu"
+   ],
+   "steps": [
+    "Mướp đắng bổ đôi, bỏ ruột, thái lát mỏng, ngâm nước muối 10 phút cho bớt đắng.",
+    "Trứng đánh tan với chút nước mắm.",
+    "Phi tỏi, xào mướp đắng lửa to 2–3 phút đến khi chín tới.",
+    "Đổ trứng vào, để yên vài giây rồi đảo nhẹ cho trứng bám đều.",
+    "Nêm vừa, rắc hành lá, tiêu."
+   ]
+  },
+  {
+   "dishId": "ngon_su_su_xao_toi",
+   "ingredients": [
+    "2 bó ngọn su su",
+    "1 củ tỏi",
+    "Hạt nêm",
+    "Dầu ăn"
+   ],
+   "steps": [
+    "Ngọn su su tước xơ, ngắt khúc, rửa sạch.",
+    "Chần qua nước sôi 1 phút, vớt ra ngâm nước lạnh, để ráo.",
+    "Phi thơm thật nhiều tỏi.",
+    "Cho rau vào đảo lửa to 1–2 phút.",
+    "Nêm hạt nêm vừa ăn, tắt bếp."
+   ]
+  },
+  {
+   "dishId": "rau_muong_luoc",
+   "ingredients": [
+    "2 bó rau muống",
+    "5 quả sấu",
+    "Muối, nước mắm, đường",
+    "Tỏi, ớt"
+   ],
+   "steps": [
+    "Rau muống nhặt, rửa sạch.",
+    "Đun nồi nước thật nhiều với chút muối cho sôi già.",
+    "Thả rau vào, luộc lửa to khoảng 2–3 phút, không đậy vung để rau xanh.",
+    "Vớt rau ra đĩa. Giữ lại nước luộc.",
+    "Cho sấu dầm vào bát nước luộc, nêm chút muối và đường. Nước mắm tỏi ớt để chấm."
+   ]
+  },
+  {
+   "dishId": "bap_cai_luoc",
+   "ingredients": [
+    "1 cái bắp cải (khoảng 800g)",
+    "Muối",
+    "Trứng luộc dầm nước mắm để chấm"
+   ],
+   "steps": [
+    "Bắp cải tách lá, rửa sạch, cắt miếng to.",
+    "Đun nồi nước với chút muối cho sôi.",
+    "Thả bắp cải vào luộc 4–5 phút đến khi vừa mềm.",
+    "Vớt ra để ráo.",
+    "Nước luộc nêm lại làm canh; chấm nước mắm dầm trứng luộc."
+   ]
+  },
+  {
+   "dishId": "su_hao_luoc",
+   "ingredients": [
+    "4 củ su hào",
+    "Muối",
+    "Nước mắm, trứng luộc hoặc vừng để chấm"
+   ],
+   "steps": [
+    "Su hào gọt vỏ thật sạch phần xơ, thái thanh hoặc lát vừa ăn.",
+    "Đun nước sôi với chút muối.",
+    "Thả su hào vào luộc 5–7 phút đến khi chín tới, còn giòn.",
+    "Vớt ra để ráo.",
+    "Chấm nước mắm dầm trứng hoặc muối vừng."
+   ]
+  },
+  {
+   "dishId": "cai_ngong_luoc",
+   "ingredients": [
+    "2 bó cải ngồng",
+    "Muối",
+    "Nước mắm, tỏi, ớt"
+   ],
+   "steps": [
+    "Cải ngồng tước bớt vỏ xơ ở cuống, cắt khúc, rửa sạch.",
+    "Đun nồi nước sôi với chút muối.",
+    "Thả cuống vào trước, sau 1 phút thả phần lá.",
+    "Luộc thêm 1–2 phút là chín, vớt ra ngay để rau giữ màu xanh.",
+    "Chấm nước mắm tỏi ớt."
+   ]
+  },
+  {
+   "dishId": "ngon_bi_luoc",
+   "ingredients": [
+    "2 bó ngọn bí",
+    "Muối",
+    "Nước mắm, tỏi, ớt hoặc muối vừng"
+   ],
+   "steps": [
+    "Ngọn bí tước sạch xơ ở thân và cuống lá, ngắt khúc, rửa sạch.",
+    "Đun nước sôi với chút muối.",
+    "Thả ngọn bí vào luộc 2–3 phút.",
+    "Vớt ra để ráo.",
+    "Chấm nước mắm tỏi ớt hoặc muối vừng."
+   ]
+  },
+  {
+   "dishId": "dau_bap_luoc",
+   "ingredients": [
+    "600g đậu bắp",
+    "Muối",
+    "Chao hoặc nước mắm gừng để chấm"
+   ],
+   "steps": [
+    "Đậu bắp rửa sạch, cắt bỏ phần cuống cứng (để nguyên quả).",
+    "Đun nước sôi với chút muối.",
+    "Thả đậu bắp vào luộc 3–4 phút.",
+    "Vớt ra ngâm nước lạnh để giữ màu xanh, để ráo.",
+    "Chấm chao hoặc nước mắm gừng."
+   ]
+  },
+  {
+   "dishId": "rau_lang_luoc",
+   "ingredients": [
+    "2 bó rau lang",
+    "Muối",
+    "Nước mắm, tỏi, ớt, chanh"
+   ],
+   "steps": [
+    "Rau lang nhặt lấy ngọn và lá non, rửa sạch.",
+    "Đun nồi nước sôi già với chút muối.",
+    "Thả rau vào luộc 2–3 phút.",
+    "Vớt ra để ráo.",
+    "Chấm nước mắm tỏi ớt chanh."
+   ]
+  },
+  {
+   "dishId": "nom_rau_muong",
+   "ingredients": [
+    "2 bó rau muống",
+    "100g lạc rang",
+    "Rau thơm (kinh giới, húng)",
+    "3 thìa nước mắm, 2 thìa đường, 2 quả chanh",
+    "Tỏi, ớt"
+   ],
+   "steps": [
+    "Rau muống lấy phần cọng, chẻ nhỏ, ngâm nước lạnh cho xoăn giòn, để thật ráo.",
+    "Lạc rang bóc vỏ, giã dập.",
+    "Pha nước trộn: nước mắm, đường, nước cốt chanh, tỏi ớt băm.",
+    "Trộn rau muống với nước trộn, để 5 phút cho ngấm.",
+    "Bày ra đĩa, rắc lạc và rau thơm thái nhỏ."
+   ]
+  },
+  {
+   "dishId": "canh_cua_rau_day_muop",
+   "ingredients": [
+    "500g cua đồng",
+    "1 bó rau đay",
+    "2 quả mướp",
+    "Muối, nước mắm",
+    "Cà pháo muối ăn kèm"
+   ],
+   "steps": [
+    "Cua bóc mai, bỏ yếm, khêu gạch ra bát riêng. Giã nhỏ thân cua với chút muối.",
+    "Hòa cua giã với nước, lọc lấy nước, bỏ bã (lọc 2–3 lần).",
+    "Rau đay nhặt, thái nhỏ. Mướp gọt vỏ, cắt miếng.",
+    "Đun nước cua lửa vừa, khuấy nhẹ để riêu không dính đáy; khi riêu nổi lên thì cho gạch vào.",
+    "Cho mướp và rau đay vào, đun sôi lại 3 phút, nêm nước mắm. Ăn kèm cà pháo."
+   ]
+  },
+  {
+   "dishId": "canh_cua_mong_toi",
+   "ingredients": [
+    "500g cua đồng",
+    "2 bó mồng tơi",
+    "Muối, nước mắm"
+   ],
+   "steps": [
+    "Cua làm sạch, khêu gạch riêng, giã thân cua với chút muối.",
+    "Hòa với nước, lọc lấy nước, bỏ bã.",
+    "Mồng tơi nhặt lá và ngọn non, rửa sạch, vò nhẹ.",
+    "Đun nước cua lửa vừa, khuấy đều tay; riêu nổi thì cho gạch cua vào.",
+    "Thả mồng tơi, đun sôi lại 2–3 phút, nêm nước mắm rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "canh_suon_sau",
+   "ingredients": [
+    "700g sườn non",
+    "300g quả sấu",
+    "Hành lá, thì là",
+    "Muối, nước mắm"
+   ],
+   "steps": [
+    "Sườn chặt miếng, chần nước sôi rồi rửa sạch.",
+    "Cho sườn vào nồi nước mới, đun sôi, hớt bọt, hạ lửa ninh 40 phút.",
+    "Sấu gọt vỏ, cho vào nồi đun đến khi sấu mềm.",
+    "Vớt sấu ra dầm nhẹ lấy nước chua (bỏ hạt), cho lại vào nồi.",
+    "Nêm muối, nước mắm cho vừa chua mặn, rắc hành lá và thì là."
+   ]
+  },
+  {
+   "dishId": "canh_ca_doc_mung",
+   "ingredients": [
+    "1 con cá chép (hoặc cá trắm) khoảng 1kg",
+    "3 cây dọc mùng",
+    "3 quả cà chua",
+    "Me hoặc dấm bỗng, thì là, hành lá",
+    "Gừng, nước mắm"
+   ],
+   "steps": [
+    "Cá làm sạch, cắt khúc, ướp muối và gừng, rán sơ cho săn.",
+    "Dọc mùng tước vỏ, thái vát, bóp muối rồi rửa lại, vắt ráo cho khỏi ngứa.",
+    "Phi hành, xào cà chua nhừ, đổ nước vào đun sôi, thêm me hoặc dấm bỗng cho chua.",
+    "Cho cá vào đun 10 phút, nêm nước mắm.",
+    "Thả dọc mùng vào, sôi lại là tắt bếp. Rắc thì là, hành lá."
+   ]
+  },
+  {
+   "dishId": "canh_rieu_cua",
+   "ingredients": [
+    "500g cua đồng",
+    "4 quả cà chua",
+    "4 bìa đậu phụ",
+    "Mẻ hoặc dấm bỗng",
+    "Hành khô, hành lá, nước mắm"
+   ],
+   "steps": [
+    "Cua làm sạch, khêu gạch riêng, giã thân với muối, lọc lấy nước.",
+    "Đậu cắt miếng rán vàng. Cà chua thái múi.",
+    "Phi hành với gạch cua, cho cà chua vào xào nhừ.",
+    "Đun nước cua lửa vừa, khuấy nhẹ; riêu nổi thì cho cà chua xào, đậu và mẻ lọc vào.",
+    "Nêm nước mắm cho vừa chua mặn, rắc hành lá. Có thể ăn với bún."
+   ]
+  },
+  {
+   "dishId": "canh_bau_tom",
+   "ingredients": [
+    "1 quả bầu",
+    "200g tôm",
+    "Hành khô, hành lá, rau mùi",
+    "Nước mắm, hạt nêm"
+   ],
+   "steps": [
+    "Tôm bóc vỏ, bỏ chỉ lưng, băm hoặc giã dập, ướp chút nước mắm.",
+    "Bầu gọt vỏ, thái miếng hoặc thái sợi.",
+    "Phi hành, xào tôm cho thơm và đỏ.",
+    "Đổ nước vào đun sôi, cho bầu vào.",
+    "Đun đến khi bầu chín mềm, nêm hạt nêm, rắc hành lá và rau mùi."
+   ]
+  },
+  {
+   "dishId": "canh_bi_xanh_tom",
+   "ingredients": [
+    "1 quả bí xanh (khoảng 1kg)",
+    "200g tôm",
+    "Hành khô, hành lá",
+    "Nước mắm, hạt nêm"
+   ],
+   "steps": [
+    "Tôm bóc vỏ, giã dập, ướp nước mắm.",
+    "Bí gọt vỏ, bỏ ruột, thái miếng vừa ăn.",
+    "Phi hành, xào tôm cho thơm.",
+    "Đổ nước, đun sôi rồi cho bí vào.",
+    "Đun đến khi bí trong và mềm, nêm hạt nêm, rắc hành lá."
+   ]
+  },
+  {
+   "dishId": "canh_rau_ngot_thit_bam",
+   "ingredients": [
+    "2 bó rau ngót",
+    "200g thịt băm",
+    "Hành khô",
+    "Nước mắm, hạt nêm"
+   ],
+   "steps": [
+    "Rau ngót tuốt lá, rửa sạch, vò hơi dập.",
+    "Ướp thịt băm với nước mắm và hành băm.",
+    "Phi hành, xào thịt cho săn.",
+    "Đổ nước vào đun sôi, hớt bọt.",
+    "Cho rau ngót vào, đun sôi lại 3 phút, nêm hạt nêm."
+   ]
+  },
+  {
+   "dishId": "canh_ngao_nau_chua",
+   "ingredients": [
+    "1,5kg ngao",
+    "3 quả cà chua",
+    "Dấm bỗng hoặc me",
+    "Thì là, hành lá",
+    "Nước mắm"
+   ],
+   "steps": [
+    "Ngao ngâm nước vo gạo có ớt 2 tiếng cho nhả cát, rửa sạch.",
+    "Luộc ngao đến khi há miệng, vớt ra tách thịt, giữ nước luộc (lọc bỏ cát).",
+    "Phi hành, xào cà chua nhừ.",
+    "Đổ nước luộc ngao vào, thêm dấm bỗng cho chua, đun sôi.",
+    "Cho thịt ngao vào, nêm nước mắm, rắc thì là và hành lá."
+   ]
+  },
+  {
+   "dishId": "canh_cai_nau_thit",
+   "ingredients": [
+    "2 bó cải canh (cải mơ hoặc cải bẹ)",
+    "200g thịt băm",
+    "Gừng, hành khô",
+    "Nước mắm, hạt nêm"
+   ],
+   "steps": [
+    "Cải nhặt, rửa sạch, cắt khúc.",
+    "Ướp thịt băm với nước mắm, hành băm.",
+    "Phi hành, xào thịt săn rồi đổ nước vào đun sôi, hớt bọt.",
+    "Cho cải và vài lát gừng vào.",
+    "Đun sôi lại 3–4 phút, nêm hạt nêm."
+   ]
+  },
+  {
+   "dishId": "canh_su_hao_xuong",
+   "ingredients": [
+    "700g xương ống",
+    "3 củ su hào",
+    "1 củ cà rốt",
+    "Hành lá, rau mùi",
+    "Muối, hạt nêm"
+   ],
+   "steps": [
+    "Xương chần nước sôi, rửa sạch.",
+    "Ninh xương với nước mới lửa nhỏ 45 phút, hớt bọt thường xuyên cho nước trong.",
+    "Su hào và cà rốt gọt vỏ, thái miếng.",
+    "Cho su hào, cà rốt vào nồi nước dùng, đun đến khi chín mềm.",
+    "Nêm muối, hạt nêm, rắc hành lá và rau mùi."
+   ]
+  },
+  {
+   "dishId": "canh_bap_cai_cuon_thit",
+   "ingredients": [
+    "1 cái bắp cải",
+    "300g thịt băm",
+    "1 bó hành lá (để buộc)",
+    "Nước mắm, tiêu, hạt nêm"
+   ],
+   "steps": [
+    "Tách từng lá bắp cải, chần qua nước sôi cho mềm.",
+    "Hành lá chần qua để làm dây buộc.",
+    "Ướp thịt băm với nước mắm, tiêu, hành băm.",
+    "Cho thịt vào lá bắp cải, cuộn chặt, buộc bằng dây hành.",
+    "Thả vào nồi nước sôi, đun lửa vừa 15 phút đến khi thịt chín, nêm hạt nêm."
+   ]
+  },
+  {
+   "dishId": "canh_khoai_tay_ca_rot_suon",
+   "ingredients": [
+    "600g sườn non",
+    "3 củ khoai tây",
+    "2 củ cà rốt",
+    "Hành lá, rau mùi",
+    "Muối, hạt nêm"
+   ],
+   "steps": [
+    "Sườn chặt miếng, chần nước sôi, rửa sạch.",
+    "Ninh sườn lửa nhỏ 30 phút, hớt bọt.",
+    "Khoai tây, cà rốt gọt vỏ, cắt miếng vừa ăn.",
+    "Cho cà rốt vào trước, 5 phút sau cho khoai tây, đun đến khi chín mềm.",
+    "Nêm muối, hạt nêm, rắc hành lá và rau mùi."
+   ]
+  },
+  {
+   "dishId": "canh_mang_ham_chan_gio",
+   "ingredients": [
+    "1 chân giò (khoảng 1kg)",
+    "500g măng khô (hoặc măng tươi)",
+    "Hành khô, hành lá, rau mùi",
+    "Muối, nước mắm"
+   ],
+   "steps": [
+    "Măng khô ngâm nước 1–2 ngày, luộc nhiều lần đến khi hết mùi; măng tươi luộc 2–3 lần đổ nước.",
+    "Chân giò làm sạch, chặt miếng, chần nước sôi.",
+    "Phi hành, cho chân giò vào xào săn rồi đổ nước, hầm lửa nhỏ 40 phút.",
+    "Cho măng thái miếng vào, hầm tiếp 40–60 phút đến khi chân giò và măng mềm.",
+    "Nêm muối, nước mắm, rắc hành lá và rau mùi."
+   ]
+  },
+  {
+   "dishId": "canh_dua_chua_ca",
+   "ingredients": [
+    "1 con cá chép (hoặc cá trắm) khoảng 1kg",
+    "300g dưa cải chua",
+    "3 quả cà chua",
+    "Gừng, thì là, hành lá",
+    "Nước mắm"
+   ],
+   "steps": [
+    "Cá cắt khúc, ướp muối và gừng, rán sơ cho săn.",
+    "Dưa rửa lại, thái khúc, vắt ráo.",
+    "Phi hành, xào cà chua nhừ rồi cho dưa vào xào qua.",
+    "Đổ nước đun sôi, cho cá vào, đun lửa vừa 10–15 phút.",
+    "Nêm nước mắm, rắc thì là và hành lá."
+   ]
+  },
+  {
+   "dishId": "canh_bi_do_xuong",
+   "ingredients": [
+    "700g xương ống",
+    "1kg bí đỏ",
+    "Hành lá, rau mùi",
+    "Muối, hạt nêm"
+   ],
+   "steps": [
+    "Xương chần nước sôi, rửa sạch.",
+    "Ninh xương lửa nhỏ 40 phút, hớt bọt.",
+    "Bí đỏ gọt vỏ, bỏ ruột, cắt miếng vừa ăn.",
+    "Cho bí vào nồi, đun 10–15 phút đến khi bí mềm.",
+    "Nêm muối, hạt nêm, rắc hành lá và rau mùi."
+   ]
+  },
+  {
+   "dishId": "canh_khoai_so_xuong",
+   "ingredients": [
+    "700g xương ống",
+    "700g khoai sọ",
+    "Hành lá, rau mùi",
+    "Muối, hạt nêm"
+   ],
+   "steps": [
+    "Xương chần nước sôi, rửa sạch, ninh lửa nhỏ 40 phút, hớt bọt.",
+    "Khoai sọ gọt vỏ (đeo găng cho khỏi ngứa), cắt miếng, xát muối rồi rửa sạch nhớt.",
+    "Cho khoai vào nồi nước dùng.",
+    "Đun lửa vừa 15–20 phút đến khi khoai bở mềm, có thể dầm vài miếng cho canh sánh.",
+    "Nêm muối, hạt nêm, rắc hành lá và rau mùi."
+   ]
+  },
+  {
+   "dishId": "canh_chua_ca",
+   "ingredients": [
+    "1 con cá diêu hồng (khoảng 1kg)",
+    "3 quả cà chua",
+    "Me hoặc dấm bỗng",
+    "Dứa, đậu bắp, giá (tùy thích)",
+    "Thì là, rau ngổ, hành lá, nước mắm"
+   ],
+   "steps": [
+    "Cá làm sạch, cắt khúc, ướp chút muối.",
+    "Phi hành, xào cà chua nhừ, đổ nước vào đun sôi.",
+    "Cho me (dầm lấy nước) hoặc dấm bỗng vào cho chua.",
+    "Thả cá vào, đun lửa vừa 10 phút; cho dứa, đậu bắp, giá vào nếu có.",
+    "Nêm nước mắm cho vừa chua mặn ngọt, rắc thì là, rau ngổ, hành lá."
+   ]
+  },
+  {
+   "dishId": "canh_trung_ca_chua",
+   "ingredients": [
+    "4 quả trứng",
+    "4 quả cà chua",
+    "Hành lá",
+    "Nước mắm, hạt nêm"
+   ],
+   "steps": [
+    "Cà chua thái múi. Trứng đánh tan với chút nước mắm.",
+    "Phi hành, xào cà chua cho mềm.",
+    "Đổ nước vào đun sôi.",
+    "Đổ trứng vào thành dòng nhỏ, dùng đũa khuấy nhẹ cho trứng nở thành vân.",
+    "Nêm hạt nêm, rắc hành lá rồi tắt bếp."
+   ]
+  },
+  {
+   "dishId": "canh_dau_phu_ca_chua",
+   "ingredients": [
+    "4 bìa đậu phụ",
+    "4 quả cà chua",
+    "Hành lá",
+    "Nước mắm, hạt nêm"
+   ],
+   "steps": [
+    "Đậu cắt miếng vuông nhỏ. Cà chua thái múi.",
+    "Phi hành, xào cà chua mềm.",
+    "Đổ nước vào đun sôi.",
+    "Thả đậu vào nhẹ tay, đun sôi lại 3–4 phút.",
+    "Nêm nước mắm, hạt nêm, rắc hành lá."
+   ]
+  },
+  {
+   "dishId": "canh_gia_thit_bam",
+   "ingredients": [
+    "500g giá đỗ",
+    "200g thịt băm",
+    "Hành lá, hẹ",
+    "Nước mắm, hạt nêm"
+   ],
+   "steps": [
+    "Giá nhặt sạch vỏ, rửa sạch.",
+    "Ướp thịt băm với nước mắm, hành băm.",
+    "Phi hành, xào thịt săn, đổ nước vào đun sôi, hớt bọt.",
+    "Cho giá vào, sôi lại 1 phút là đủ (giá còn giòn).",
+    "Nêm hạt nêm, rắc hành lá hoặc hẹ."
+   ]
+  },
+  {
+   "dishId": "canh_ca_ngot",
+   "ingredients": [
+    "1kg cá rô phi (hoặc cá quả)",
+    "3 quả cà chua",
+    "Thì là, hành lá",
+    "Gừng, nước mắm"
+   ],
+   "steps": [
+    "Cá làm sạch, cắt khúc, ướp muối và gừng 10 phút.",
+    "Phi hành, xào cà chua mềm.",
+    "Đổ nước đun sôi, thả cá vào.",
+    "Đun lửa vừa 10–15 phút, hớt bọt cho nước trong.",
+    "Nêm nước mắm, rắc thì là và hành lá."
+   ]
+  }
+ ]
+}

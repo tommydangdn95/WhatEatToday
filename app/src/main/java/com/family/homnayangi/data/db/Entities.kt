@@ -89,6 +89,21 @@ data class WeatherCache(
     val fetchedAt: Long,
 )
 
+/**
+ * Công thức nấu (F10). Bảng riêng để bản cập nhật thêm được công thức cho món đã có
+ * mà không ghi đè món. [isEdited] = Mẹ đã sửa → seed không bao giờ ghi đè.
+ */
+@Entity
+data class Recipe(
+    @PrimaryKey val dishId: String,
+    /** Mỗi phần tử một dòng, vd "700g thịt ba chỉ". */
+    val ingredients: List<String>,
+    val steps: List<String>,
+    /** Link video Mẹ tự dán; null → mở trang tìm kiếm YouTube theo tên món. */
+    val videoUrl: String? = null,
+    val isEdited: Boolean = false,
+)
+
 /** Món kèm nguyên liệu chính. */
 data class DishWithIngredients(
     @Embedded val dish: Dish,

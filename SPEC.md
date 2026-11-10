@@ -1,8 +1,8 @@
 # SPEC — App "Hôm nay ăn gì" (bản 1: Android cho Mẹ)
 
-> Phiên bản spec: 1.0 · 2026-11-10
+> Phiên bản spec: 1.1 · 2026-11-10 (thêm F10 — công thức nấu vào bản 1)
 > Nguồn: tài liệu requirements "App 'Hôm nay ăn gì' cho Mẹ — Requirements".
-> File dữ liệu đi kèm: `seed_data.json` (80 món + nguyên liệu) → đặt vào `app/src/main/assets/seed_data.json`.
+> File dữ liệu đi kèm: `seed_data.json` (80 món + nguyên liệu) và `recipes.json` (công thức 80 món) → đặt trong `app/src/main/assets/`.
 
 ---
 
@@ -22,13 +22,12 @@ App Android giúp Mẹ trả lời câu "hôm nay ăn gì" trong dưới 30 giâ
 
 ### 1.1 Phạm vi bản 1 (MVP)
 
-F01–F09, F11–F13, F17, F19, F20, F25 (chi tiết ở mục 7).
+F01–F13, F17, F19, F20, F25 (chi tiết ở mục 7).
 
 ### 1.2 Ngoài phạm vi bản 1 (để sau)
 
 | ID | Nội dung |
 | --- | --- |
-| F10 | Xem cách nấu (các bước / link YouTube) |
 | F14 | Thực đơn 7 ngày |
 | F15 | Hồ sơ thành viên, món từng người không thích |
 | F16, F22, F23 | Bản web cho cả nhà: đăng nhập Zalo, xem thực đơn, góp ý, nhận thông báo (cần host server; 3 người dùng iPhone) |
@@ -194,6 +193,14 @@ data class DishIngredient(val dishId: String, val ingredientId: String, val isMa
     val createdFromMealLogId: Long?
 )
 
+@Entity data class Recipe(                  // F10 — bảng riêng để bản cập nhật thêm được công thức
+    @PrimaryKey val dishId: String,
+    val ingredients: List<String>,          // mỗi phần tử một dòng, vd "700g thịt ba chỉ"
+    val steps: List<String>,
+    val videoUrl: String?,                  // link Mẹ dán; null → trang tìm kiếm YouTube
+    val isEdited: Boolean = false           // Mẹ đã sửa → seed không ghi đè
+)
+
 @Entity data class WeatherCache(
     @PrimaryKey val date: LocalDate,
     val maxTempC: Double,
@@ -236,6 +243,19 @@ data class DishIngredient(val dishId: String, val ingredientId: String, val isMa
 - Lần chạy đầu: `SeedLoader` đọc file, tạo `nameNoAccent`, insert vào Room trong 1 transaction.
 - Khi `version` trong file tăng: chỉ thêm món/nguyên liệu mới, **không ghi đè** món Mẹ đã sửa, đã thích hoặc đã ẩn.
 - Mùa và thời gian nấu trong file là ước tính ban đầu, Mẹ sửa được trong app.
+
+### 6.1 Công thức (`recipes.json`)
+
+```json
+{ "version": 1, "servings": 7,
+  "recipes": [ { "dishId": "ca_kho_rieng",
+                 "ingredients": ["1 con cá trắm (khoảng 1,2kg)", "1 củ riềng to"],
+                 "steps": ["Cá làm sạch, khứa khúc…", "…"] } ] }
+```
+
+- Có `version` riêng (lưu `recipesVersion` trong DataStore). Tăng `version` → máy đã cài nhận công thức mới.
+- Chỉ thêm công thức cho món đang có; insert IGNORE nên không ghi đè công thức Mẹ đã sửa.
+- Bước nấu không tự ghi số thứ tự — màn hình tự đánh số.
 
 ---
 
@@ -300,6 +320,16 @@ Form: tên (bắt buộc), loại (4 nút lớn), ảnh (chụp hoặc chọn), 
 ### F09 — Yêu thích / Ẩn món
 
 Trên thẻ món và trong Món của nhà: nút tim (yêu thích) và "Nhà không ăn món này" (ẩn). Món ẩn không bao giờ được gợi ý; có mục "Món đã ẩn" để bỏ ẩn.
+
+### F10 — Xem cách nấu
+
+- Trên thẻ món (màn hình Hôm nay): bấm vào ảnh / tên món hoặc dòng "Xem cách nấu ›" → màn hình Cách nấu.
+- Hiện: tên món, loại, thời gian nấu; "Nguyên liệu (cho 7 người)" dạng gạch đầu dòng; "Các bước nấu" đánh số to.
+- Nút "Tìm video trên YouTube": mở trang tìm kiếm "cách nấu <tên món>" (không lưu sẵn link video cụ thể). Nếu Mẹ đã dán link thì nút là "Xem video cách nấu".
+- "Sửa công thức" / "Thêm công thức" (món chưa có): 3 ô — nguyên liệu (mỗi dòng một thứ), các bước (mỗi dòng một bước, bắt buộc ≥ 1), link video (không bắt buộc). Số thứ tự / gạch đầu dòng Mẹ tự gõ được bỏ đi khi lưu.
+- Có sẵn công thức cho 80 món trong `recipes.json`, kiểu miền Bắc, lượng cho 7 người.
+
+**Chấp nhận:** bấm vào món trên mâm gợi ý → thấy nguyên liệu và các bước; sửa xong, cài APK mới đè lên vẫn giữ bản Mẹ đã sửa.
 
 ### F11 — Lịch sử
 

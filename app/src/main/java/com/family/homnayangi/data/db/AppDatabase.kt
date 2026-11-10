@@ -1,5 +1,6 @@
 package com.family.homnayangi.data.db
 
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -17,9 +18,13 @@ import androidx.room.TypeConverters
         MealLog::class,
         ShoppingItem::class,
         WeatherCache::class,
+        Recipe::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = true,
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2),   // thêm bảng Recipe (F10)
+    ],
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -29,6 +34,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun mealLogDao(): MealLogDao
     abstract fun shoppingDao(): ShoppingDao
     abstract fun weatherDao(): WeatherDao
+    abstract fun recipeDao(): RecipeDao
 
     companion object {
         const val NAME = "homnayangi.db"

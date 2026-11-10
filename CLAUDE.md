@@ -42,15 +42,16 @@ domain/      Kotlin thuần, không import Android → unit test được
   WeatherClassifier  phân loại thời tiết + mặc định theo tháng (F19)
   MenuText           mọi câu chữ: tiêu đề, ngày, mẫu tin nhắn Zalo
   TextNormalizer     bỏ dấu để tìm kiếm không dấu
+  RecipeText         tách dòng khi sửa công thức, link tìm kiếm YouTube, nhãn thời gian nấu
   model/             enum + DishInfo, MealRecord, MealTarget, MealSlot
 data/
   db/        Room: Entities.kt, Daos.kt, Converters.kt, AppDatabase.kt
-  seed/      SeedParser (thuần, test được) + SeedLoader (Android)
+  seed/      SeedParser, RecipeParser (thuần, test được) + SeedLoader (Android)
   settings/  SettingsRepository (DataStore, SPEC §5.3)
   repo/      DishRepository, MealRepository, PantryRepository
 di/          AppModule (Hilt)
 share/       ZaloSharer
-ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, today/, history/
+ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, today/, history/, recipe/
 ```
 
 - MVVM: `@HiltViewModel` + `StateFlow`; màn hình dùng `hiltViewModel()` từ `androidx.hilt.lifecycle.viewmodel.compose`.
@@ -63,8 +64,9 @@ ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, toda
 - **Xoá/ẩn phải có "Hoàn tác" 5 giây:** dùng `SnackbarDuration.Indefinite` bọc trong `withTimeoutOrNull(5_000)` (xem `TodayScreen.kt`).
 - **Chỉ giao diện sáng**, màu trong `ui/theme/Theme.kt` đã kiểm tương phản WCAG AA. Thêm màu mới thì kiểm lại.
 - Kiểm tra chữ trên nút **không bị xuống dòng** ở màn hình 360dp (đã gặp với "Đổi món khác", "Chọn mâm này").
-- **Room:** không dùng `fallbackToDestructiveMigration`. Đổi schema → tăng `version`, viết `Migration` + test. Schema export ở `app/schemas/` (commit vào git).
+- **Room:** không dùng `fallbackToDestructiveMigration`. Đổi schema → tăng `version`, thêm `AutoMigration` (hoặc `Migration` viết tay) + test trong `androidTest/MigrationTest.kt`. Schema export ở `app/schemas/` (commit vào git). DB hiện ở **version 2** (v2 thêm bảng `Recipe`).
 - **Seed:** `SeedLoader` chỉ insert IGNORE — không bao giờ ghi đè món Mẹ đã sửa/thích/ẩn. Thêm món mới vào `seed_data.json` thì tăng `version`.
+- **Công thức** (`assets/recipes.json`): version riêng (`recipesVersion`). Thêm món mới vào seed thì phải thêm công thức và tăng version của **cả hai** file — `RecipeFileTest` sẽ báo lỗi nếu có món thiếu công thức. Bước nấu không ghi số thứ tự ở đầu.
 - **MealLog:** mỗi (date, mealType) một bản ghi; chốt lại dùng `MealLogDao.upsertByMeal` (không dùng `REPLACE`/`@Upsert` vì unique index ngoài khoá chính).
 - **Quyền:** không khai báo `CAMERA` (chụp ảnh qua `TakePicture` không cần quyền; khai báo mà chưa cấp sẽ crash). Không xin vị trí, bộ nhớ.
 - Code dùng API > 28 phải bọc `if (Build.VERSION.SDK_INT >= …)`.
@@ -83,15 +85,18 @@ MSYS_NO_PATHCONV=1 "$ADB" shell am start -W -n com.family.homnayangi/.MainActivi
 
 - Trong Git Bash phải đặt `MSYS_NO_PATHCONV=1`, nếu không `/sdcard/...` bị đổi thành đường dẫn Windows.
 - Tìm nút để bấm: `uiautomator dump /sdcard/ui.xml` rồi đọc `bounds` theo `text`/`content-desc`. Python in tiếng Việt cần `python -X utf8` (console mặc định cp1252).
+- **Chạy test migration mà không gỡ app khỏi máy:** `./gradlew connectedDebugAndroidTest` sẽ gỡ app sau khi chạy (mất dữ liệu thử). Thay vào đó build `:app:assembleDebugAndroidTest`, cài `app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk` rồi chạy
+  `adb shell am instrument -w -e class com.family.homnayangi.MigrationTest com.family.homnayangi.test/androidx.test.runner.AndroidJUnitRunner`.
 - Logcat lọc theo `SeedLoader` để xem dữ liệu ban đầu đã nạp chưa. Crash của `com.google.android.gms` trên máy này là của Google Play Services, không phải app.
 - Máy test **chưa cài Zalo** → nút "Gửi cho cả nhà" mở bảng chọn app (đúng SPEC).
 
-## Tiến độ (cập nhật 10/11/2026)
+## Tiến độ (cập nhật 10/11/2026, sau F10)
 
 Đã xong (đều đã chạy thử trên máy):
 - Khung project, Room, SeedLoader, SuggestionEngine + 28 unit test
 - **Hôm nay** (F01–F05, tim/ẩn của F09 trên thẻ): chọn bữa/ngày, đổi món, đổi cả mâm, lọc món nhanh, chốt, chọn lại, gửi Zalo **dạng chữ**
 - **Lịch sử** (F11): theo tuần, "Nấu lại mâm này"
+- **Cách nấu** (F10): công thức 80 món (`recipes.json`), xem / sửa / thêm, nút tìm video YouTube; DB v2 + test migration chạy trên máy
 
 Chưa làm (theo thứ tự SPEC §11):
 1. Tủ lạnh (F06, F20) → Đi chợ (F12, F13; chốt mâm tự thêm nguyên liệu, trừ đồ có trong tủ lạnh)
@@ -103,4 +108,6 @@ Vấn đề đang mở:
 - Mở app lần đầu ~4 giây trên bản debug (SPEC yêu cầu < 2 giây) → đo lại trên bản release có R8.
 - Chưa có ảnh món; đang dùng ô màu theo loại món (`CategoryBadge`). Thẻ món khá cao, một màn hình chỉ thấy ~2 thẻ — xem lại bố cục khi thêm ảnh.
 - `canh_chua_ca` trong seed có mùa `["NONG","LANH"]` (được 30 điểm cả ngày nóng lẫn lạnh); đã đề xuất đổi thành `QUANH_NAM`, người dùng chưa quyết.
-- Máy test còn dữ liệu thử: bữa tối 10/11 đã chốt, món "Nem rán" đang bị ẩn.
+- Máy test còn dữ liệu thử: bữa tối 10/11 đã chốt, món "Nem rán" đang bị ẩn, công thức "Giả cầy" đã bị sửa thử (thêm dòng "La lot thai chi").
+- Ô sửa "Các bước nấu" là một ô nhiều dòng: bước dài tự xuống dòng trông giống 2 bước. Nếu Mẹ thấy khó dùng thì đổi sang mỗi bước một ô riêng.
+- Màn hình Lịch sử chưa có lối vào Cách nấu (mới chỉ có ở thẻ món màn hình Hôm nay; Món nhà sẽ có khi làm F07–F09).

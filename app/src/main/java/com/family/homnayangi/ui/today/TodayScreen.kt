@@ -1,6 +1,7 @@
 package com.family.homnayangi.ui.today
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,6 +56,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.heading
@@ -75,6 +77,7 @@ import kotlinx.coroutines.withTimeoutOrNull
 @Composable
 fun TodayScreen(
     onOpenSettings: () -> Unit,
+    onOpenRecipe: (dishId: String) -> Unit,
     viewModel: TodayViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -147,6 +150,7 @@ fun TodayScreen(
                     onSwap = { viewModel.swap(index) },
                     onHide = { viewModel.hide(index) },
                     onFavorite = { card.dish?.let(viewModel::toggleFavorite) },
+                    onOpenRecipe = { card.dish?.let { onOpenRecipe(it.id) } },
                 )
             }
 
@@ -276,6 +280,7 @@ private fun DishCard(
     onSwap: () -> Unit,
     onHide: () -> Unit,
     onFavorite: () -> Unit,
+    onOpenRecipe: () -> Unit,
 ) {
     val dish = card.dish
     Card(
@@ -284,14 +289,31 @@ private fun DishCard(
         modifier = Modifier.fillMaxWidth(),
     ) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                CategoryBadge(dish?.category)
-                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text(
-                        text = dish?.name ?: "Chưa có món loại này",
-                        style = MaterialTheme.typography.titleMedium,
-                    )
-                    if (dish != null) DishTags(dish, card.hasPantryIngredient)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                // Bấm vào ảnh / tên món → xem cách nấu (F10).
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .clip(MaterialTheme.shapes.medium)
+                        .clickable(enabled = dish != null, onClickLabel = "Xem cách nấu", onClick = onOpenRecipe),
+                ) {
+                    CategoryBadge(dish?.category)
+                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text(
+                            text = dish?.name ?: "Chưa có món loại này",
+                            style = MaterialTheme.typography.titleMedium,
+                        )
+                        if (dish != null) {
+                            DishTags(dish, card.hasPantryIngredient)
+                            Text(
+                                "Xem cách nấu ›",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
                 }
                 if (dish != null) FavoriteButton(dish, onFavorite)
             }

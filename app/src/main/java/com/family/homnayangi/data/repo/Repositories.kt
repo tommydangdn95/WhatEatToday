@@ -5,6 +5,8 @@ import com.family.homnayangi.data.db.DishWithIngredients
 import com.family.homnayangi.data.db.MealLog
 import com.family.homnayangi.data.db.MealLogDao
 import com.family.homnayangi.data.db.PantryDao
+import com.family.homnayangi.data.db.Recipe
+import com.family.homnayangi.data.db.RecipeDao
 import com.family.homnayangi.domain.model.DishInfo
 import com.family.homnayangi.domain.model.IngredientRef
 import com.family.homnayangi.domain.model.MealRecord
@@ -53,4 +55,13 @@ class MealRepository @Inject constructor(private val dao: MealLogDao) {
 @Singleton
 class PantryRepository @Inject constructor(private val dao: PantryDao) {
     val ingredientIds: Flow<Set<String>> = dao.observeIds().map { it.toSet() }
+}
+
+@Singleton
+class RecipeRepository @Inject constructor(private val dao: RecipeDao) {
+    fun observe(dishId: String): Flow<Recipe?> = dao.observe(dishId)
+
+    /** Mẹ sửa / thêm công thức → đánh dấu isEdited để bản cập nhật seed không ghi đè. */
+    suspend fun save(dishId: String, ingredients: List<String>, steps: List<String>, videoUrl: String?) =
+        dao.save(Recipe(dishId, ingredients, steps, videoUrl, isEdited = true))
 }

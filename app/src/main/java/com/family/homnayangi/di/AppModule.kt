@@ -39,6 +39,7 @@ object AppModule {
     @Provides fun mealLogDao(db: AppDatabase) = db.mealLogDao()
     @Provides fun shoppingDao(db: AppDatabase) = db.shoppingDao()
     @Provides fun weatherDao(db: AppDatabase) = db.weatherDao()
+    @Provides fun recipeDao(db: AppDatabase) = db.recipeDao()
 
     @Provides @Singleton
     fun dataStore(@ApplicationContext context: Context): DataStore<Preferences> =

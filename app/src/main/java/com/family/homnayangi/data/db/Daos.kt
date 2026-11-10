@@ -118,3 +118,16 @@ interface WeatherDao {
     @Query("SELECT * FROM WeatherCache WHERE date = :date LIMIT 1")
     suspend fun get(date: LocalDate): WeatherCache?
 }
+
+@Dao
+interface RecipeDao {
+    @Query("SELECT * FROM Recipe WHERE dishId = :dishId LIMIT 1")
+    fun observe(dishId: String): Flow<Recipe?>
+
+    /** IGNORE: không ghi đè công thức đã có (Mẹ có thể đã sửa). */
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertIgnore(recipes: List<Recipe>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun save(recipe: Recipe)
+}

@@ -7,6 +7,7 @@ import com.family.homnayangi.data.db.AppDatabase
 import com.family.homnayangi.data.db.Dish
 import com.family.homnayangi.data.db.DishIngredient
 import com.family.homnayangi.data.db.Ingredient
+import com.family.homnayangi.data.db.Recipe
 import com.family.homnayangi.data.settings.SettingsRepository
 import com.family.homnayangi.domain.TextNormalizer
 import com.family.homnayangi.domain.model.DishCategory
@@ -90,6 +91,41 @@ object SeedParser {
     }
 }
 
+@Serializable
+data class RecipeFile(
+    val version: Int,
+    val servings: Int = 7,
+    val recipes: List<SeedRecipe>,
+)
+
+@Serializable
+data class SeedRecipe(
+    val dishId: String,
+    val ingredients: List<String>,
+    val steps: List<String>,
+    val videoUrl: String? = null,
+)
+
+/** Đọc `assets/recipes.json` (F10). Thuần Kotlin để unit test. */
+object RecipeParser {
+    private val json = Json { ignoreUnknownKeys = true }
+
+    data class Result(val version: Int, val servings: Int, val recipes: List<Recipe>)
+
+    fun parse(text: String): Result {
+        val file = json.decodeFromString<RecipeFile>(text)
+        val dups = file.recipes.groupBy { it.dishId }.filterValues { it.size > 1 }.keys
+        require(dups.isEmpty()) { "recipes.json: trùng công thức cho $dups" }
+        val empty = file.recipes.filter { it.steps.isEmpty() || it.ingredients.isEmpty() }.map { it.dishId }
+        require(empty.isEmpty()) { "recipes.json: công thức thiếu nguyên liệu hoặc bước nấu: $empty" }
+        return Result(
+            version = file.version,
+            servings = file.servings,
+            recipes = file.recipes.map { Recipe(it.dishId, it.ingredients, it.steps, it.videoUrl) },
+        )
+    }
+}
+
 /**
  * Nạp `assets/seed_data.json` vào Room lần chạy đầu, và mỗi khi `version` trong file tăng.
  * Chỉ THÊM món / nguyên liệu mới; không ghi đè bản ghi đã có (Mẹ có thể đã sửa, thích, ẩn).
@@ -101,6 +137,11 @@ class SeedLoader @Inject constructor(
     private val settings: SettingsRepository,
 ) {
     suspend fun ensureSeeded() {
+        ensureDishes()
+        ensureRecipes()   // sau món, vì công thức chỉ thêm cho món đã có
+    }
+
+    private suspend fun ensureDishes() {
         try {
             val stored = settings.seedVersion()
             val text = context.assets.open(ASSET).bufferedReader(Charsets.UTF_8).use { it.readText() }
@@ -121,8 +162,25 @@ class SeedLoader @Inject constructor(
         }
     }
 
+    /** Công thức có version riêng: tăng `version` trong recipes.json là máy đã cài sẽ nhận công thức mới. */
+    private suspend fun ensureRecipes() {
+        try {
+            val text = context.assets.open(RECIPES_ASSET).bufferedReader(Charsets.UTF_8).use { it.readText() }
+            val parsed = RecipeParser.parse(text)
+            if (parsed.version <= settings.recipesVersion()) return
+            // Chỉ thêm công thức cho món đang có; IGNORE để không ghi đè công thức Mẹ đã sửa.
+            val dishIds = db.dishDao().getAllWithIngredients().mapTo(HashSet()) { it.dish.id }
+            db.recipeDao().insertIgnore(parsed.recipes.filter { it.dishId in dishIds })
+            settings.setRecipesVersion(parsed.version)
+            Log.i(TAG, "Công thức v${parsed.version}: ${parsed.recipes.size} món")
+        } catch (e: Exception) {
+            Log.e(TAG, "Không nạp được công thức", e)
+        }
+    }
+
     companion object {
         const val ASSET = "seed_data.json"
+        const val RECIPES_ASSET = "recipes.json"
         private const val TAG = "SeedLoader"
     }
 }
