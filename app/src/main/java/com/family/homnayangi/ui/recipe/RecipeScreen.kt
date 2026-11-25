@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -48,7 +49,7 @@ import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.family.homnayangi.domain.RecipeText
-import com.family.homnayangi.ui.today.CategoryBadge
+import com.family.homnayangi.ui.common.DishImage
 
 /** F10 — xem cách nấu một món; Mẹ sửa hoặc thêm công thức được. */
 @Composable
@@ -100,16 +101,19 @@ private fun RecipeView(state: RecipeUiState, onEdit: () -> Unit) {
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            CategoryBadge(dish.category)
-            Column {
-                Text(dish.name, style = MaterialTheme.typography.headlineSmall)
-                Text(
-                    "${dish.category.label} · ${RecipeText.cookTimeLabel(dish.cookTimeMin)}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
+        // Ảnh món cỡ lớn, đúng tỉ lệ 4:3 của ảnh gốc.
+        DishImage(
+            dish = dish,
+            shape = MaterialTheme.shapes.large,
+            modifier = Modifier.fillMaxWidth().aspectRatio(4f / 3f),
+        )
+        Column {
+            Text(dish.name, style = MaterialTheme.typography.headlineSmall)
+            Text(
+                "${dish.category.label} · ${RecipeText.cookTimeLabel(dish.cookTimeMin)}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
 
         if (recipe == null) {

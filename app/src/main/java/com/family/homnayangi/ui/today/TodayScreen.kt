@@ -11,12 +11,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
@@ -75,6 +77,8 @@ import com.family.homnayangi.domain.model.DishCategory
 import com.family.homnayangi.domain.model.DishInfo
 import com.family.homnayangi.domain.model.MealType
 import com.family.homnayangi.share.MenuImageRenderer
+import com.family.homnayangi.ui.common.DishImage
+import com.family.homnayangi.ui.common.rememberDishPhoto
 import com.family.homnayangi.share.ZaloSharer
 import com.family.homnayangi.ui.theme.CategoryPalette
 import kotlinx.coroutines.Dispatchers
@@ -330,9 +334,19 @@ private fun DishCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = Modifier.fillMaxWidth(),
     ) {
+        // Ảnh món to, trải hết chiều ngang thẻ để Mẹ nhìn là nhận ra món. Bấm ảnh → xem cách nấu (F10).
+        if (dish != null) {
+            DishImage(
+                dish = dish,
+                shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(DISH_IMAGE_HEIGHT)
+                    .clickable(onClickLabel = "Xem cách nấu ${dish.name}", onClick = onOpenRecipe),
+            )
+        }
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                // Bấm vào ảnh / tên món → xem cách nấu (F10).
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -341,7 +355,7 @@ private fun DishCard(
                         .clip(MaterialTheme.shapes.medium)
                         .clickable(enabled = dish != null, onClickLabel = "Xem cách nấu", onClick = onOpenRecipe),
                 ) {
-                    CategoryBadge(dish?.category)
+                    if (dish == null) CategoryBadge(null)
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(
                             text = dish?.name ?: "Chưa có món loại này",
@@ -390,8 +404,8 @@ private fun DishCard(
 @Composable
 private fun DishTags(dish: DishInfo, hasPantry: Boolean) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        // Nhãn loại món đang nằm trên ô màu bên trái; khi có ảnh món thật sẽ hiện thêm nhãn loại ở đây.
-        if (dish.imageUri != null) {
+        // Có ảnh thì ô màu (có chữ loại món) không hiện → ghi loại món bằng nhãn nhỏ.
+        if (rememberDishPhoto(dish) != null) {
             Tag(dish.category.label, MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.colorScheme.onSurfaceVariant)
         }
         if (hasPantry) Tag("Có sẵn đồ", MaterialTheme.colorScheme.primaryContainer, MaterialTheme.colorScheme.onPrimaryContainer)
@@ -434,6 +448,9 @@ fun CategoryBadge(category: DishCategory?, size: Int = 64) {
         Text(category?.label ?: "?", color = fg, style = MaterialTheme.typography.labelMedium, textAlign = TextAlign.Center)
     }
 }
+
+/** Chiều cao ảnh trên thẻ món (khung rộng ~330dp → cắt bớt trên/dưới của ảnh 4:3, món vẫn nằm giữa). */
+private val DISH_IMAGE_HEIGHT = 180.dp
 
 // -------------------------------------------------------------------- nút chính dưới cùng
 

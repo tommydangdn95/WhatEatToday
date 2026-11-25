@@ -44,6 +44,7 @@ domain/      Kotlin thuần, không import Android → unit test được
   TextNormalizer     bỏ dấu để tìm kiếm không dấu
   RecipeText         tách dòng khi sửa công thức, link tìm kiếm YouTube, nhãn thời gian nấu
   ReminderPlanner    F17: giờ báo kế tiếp, bữa của từng mốc nhắc, câu chữ thông báo
+  DishPhoto          chọn ảnh món: ảnh Mẹ chụp (imageUri) → assets/dish_images/<mã>.webp → null (ô màu)
   model/             enum + DishInfo, MealRecord, MealTarget, MealSlot
 data/
   db/        Room: Entities.kt, Daos.kt, Converters.kt, AppDatabase.kt
@@ -53,7 +54,8 @@ data/
 di/          AppModule (Hilt)
 reminder/    F17: ReminderScheduler (AlarmManager), ReminderNotifier (dựng thông báo + gợi ý), ReminderReceiver, BootReceiver
 share/       ZaloSharer
-ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, today/, history/, recipe/, dishes/, settings/
+ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, common/ (DishImage), theme/, today/, history/, recipe/, dishes/, settings/
+tools/       tạo ảnh món (Gemini) + optimize_dish_images.py; art/ = ảnh gốc + trang xem trước
 ```
 
 - MVVM: `@HiltViewModel` + `StateFlow`; màn hình dùng `hiltViewModel()` từ `androidx.hilt.lifecycle.viewmodel.compose`.
@@ -71,6 +73,7 @@ ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, toda
 - Kiểm tra chữ trên nút **không bị xuống dòng** ở màn hình 360dp (đã gặp với "Đổi món khác", "Chọn mâm này").
 - **Room:** không dùng `fallbackToDestructiveMigration`. Đổi schema → tăng `version`, thêm `AutoMigration` (hoặc `Migration` viết tay) + test trong `androidTest/MigrationTest.kt`. Schema export ở `app/schemas/` (commit vào git). DB hiện ở **version 2** (v2 thêm bảng `Recipe`).
 - **Seed:** `SeedLoader` chỉ insert IGNORE — không bao giờ ghi đè món Mẹ đã sửa/thích/ẩn. Thêm món mới vào `seed_data.json` thì tăng `version`.
+- **Ảnh món** (`assets/dish_images/<mã_món>.webp`, 960×720): hiển thị qua `ui/common/DishImage` (Coil, tự về ô màu nếu thiếu ảnh). Thêm món mới vào seed thì phải có ảnh — `DishPhotoTest` báo lỗi nếu thiếu. Quy trình: tạo ảnh bằng `tools/gemini_console.js` (dán vào Console web Gemini; API gói miễn phí không tạo được ảnh) → `python -X utf8 tools/optimize_dish_images.py` (cắt bỏ hình mờ Gemini, lưu gốc vào `art/`, xuất WebP, tạo `art/xem_anh_mon.html`). `images/` (PNG tải về) và `Secret.txt` (khoá API) không commit.
 - **Công thức** (`assets/recipes.json`): version riêng (`recipesVersion`). Thêm món mới vào seed thì phải thêm công thức và tăng version của **cả hai** file — `RecipeFileTest` sẽ báo lỗi nếu có món thiếu công thức. Bước nấu không ghi số thứ tự ở đầu.
 - **MealLog:** mỗi (date, mealType) một bản ghi; chốt lại dùng `MealLogDao.upsertByMeal` (không dùng `REPLACE`/`@Upsert` vì unique index ngoài khoá chính).
 - **Quyền:** nhắc nhở dùng `RECEIVE_BOOT_COMPLETED`, `SCHEDULE_EXACT_ALARM`, `POST_NOTIFICATIONS` (chỉ hỏi trên API 33+), `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` (app nội bộ, không lên Play). Không khai báo `CAMERA` (chụp ảnh qua `TakePicture` không cần quyền; khai báo mà chưa cấp sẽ crash). Không xin vị trí, bộ nhớ.
@@ -100,6 +103,7 @@ MSYS_NO_PATHCONV=1 "$ADB" shell am start -W -n com.family.homnayangi/.MainActivi
 ## Tiến độ (cập nhật 10/11/2026, sau F10 + yêu thích)
 
 Đã xong (đều đã chạy thử trên máy):
+- **Ảnh món** cho đủ 80 món (Hôm nay, Món nhà, thêm món, Cách nấu, ảnh gửi Zalo)
 - Khung project, Room, SeedLoader, SuggestionEngine + 28 unit test
 - **Hôm nay** (F01–F05, tim của F09 trên thẻ): chọn bữa/ngày, đổi món, đổi cả mâm, **"+ Thêm món"** (bảng chọn `AddDishSheet`, slot `THEM`, "Bỏ món" trên **mọi** thẻ — bỏ khỏi bữa, không ẩn, mâm có thể < 4 món theo ý người dùng; ẩn món chỉ ở tab Món nhà), lọc món nhanh, chốt, chọn lại, gửi Zalo **chỉ ảnh thực đơn PNG, không kèm chữ, không ghi số người** (F25, `share/MenuImageRenderer`; chưa có ảnh món thì vẽ ô màu theo loại — `ui/theme/CategoryPalette`)
 - **Lịch sử** (F11): theo tuần, "Nấu lại mâm này"
@@ -115,7 +119,9 @@ Chưa làm (theo thứ tự SPEC §11):
 
 Vấn đề đang mở:
 - Mở app lần đầu ~4 giây trên bản debug (SPEC yêu cầu < 2 giây) → đo lại trên bản release có R8.
-- Chưa có ảnh món; đang dùng ô màu theo loại món (`CategoryBadge`). Thẻ món khá cao, một màn hình chỉ thấy ~2 thẻ — xem lại bố cục khi thêm ảnh.
+- Thẻ món tab Hôm nay: ảnh 180dp trải ngang + tên + nút → một màn hình thấy ~1,5 thẻ. Nếu Mẹ thấy phải cuộn nhiều thì thu ảnh lại.
+- Ảnh món là ảnh AI (Gemini), 75/80 ảnh gốc chỉ 1200×896 (đủ cho app). Món nào Mẹ thấy không giống món nhà làm → tạo lại riêng món đó.
+- APK debug ~46 MB (R8 tắt; ảnh món ~6,6 MB).
 - `canh_chua_ca` trong seed có mùa `["NONG","LANH"]` (được 30 điểm cả ngày nóng lẫn lạnh); đã đề xuất đổi thành `QUANH_NAM`, người dùng chưa quyết.
 - Máy test còn dữ liệu thử: bữa tối 10/11 đã chốt, "Cá kho riềng" và "Cá chép om dưa" đang yêu thích, công thức "Giả cầy" đã bị sửa thử (thêm dòng "La lot thai chi"). Đã bỏ ẩn hết món.
 - Khi thử bằng script: bấm "Hoàn tác" phải ngay sau khi ẩn (thanh chỉ hiện 5 giây); lần mở app đầu tiên ngay sau `adb install` đôi khi bị Android bỏ qua → kiểm tra `mResumedActivity` rồi mở lại.

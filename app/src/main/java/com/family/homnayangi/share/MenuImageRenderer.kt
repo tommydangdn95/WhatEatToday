@@ -14,9 +14,11 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import android.text.TextUtils
 import androidx.core.content.FileProvider
+import com.family.homnayangi.domain.DishPhoto
 import com.family.homnayangi.domain.MenuText
 import com.family.homnayangi.domain.model.DishInfo
 import com.family.homnayangi.domain.model.MealTarget
+import com.family.homnayangi.ui.common.BundledDishPhotos
 import com.family.homnayangi.ui.theme.CategoryPalette
 import java.io.File
 import java.time.LocalDate
@@ -130,9 +132,10 @@ object MenuImageRenderer {
         }
     }
 
-    /** Ảnh món nếu Mẹ đã chụp/chọn (F08); không có thì ô màu theo loại món. */
+    /** Ảnh món (Mẹ chụp hoặc ảnh có sẵn trong app); không có thì ô màu theo loại món. */
     private fun drawThumb(c: Canvas, context: Context, dish: DishInfo, rect: RectF) {
-        val photo = dish.imageUri?.let { loadPhoto(context, it, rect.width().toInt()) }
+        val source = DishPhoto.source(dish, BundledDishPhotos.ids(context))
+        val photo = source?.let { loadPhoto(context, it, rect.width().toInt()) }
         if (photo != null) {
             val save = c.save()
             val path = android.graphics.Path().apply { addRoundRect(rect, 22f, 22f, android.graphics.Path.Direction.CW) }
@@ -153,13 +156,18 @@ object MenuImageRenderer {
     }
 
     private fun loadPhoto(context: Context, uriString: String, targetPx: Int): Bitmap? = try {
-        val uri = if (uriString.startsWith("/")) Uri.fromFile(File(uriString)) else Uri.parse(uriString)
+        val assetPath = DishPhoto.assetPath(uriString)
+        val open: () -> java.io.InputStream? = when {
+            assetPath != null -> { { context.assets.open(assetPath) } }
+            uriString.startsWith("/") -> { { context.contentResolver.openInputStream(Uri.fromFile(File(uriString))) } }
+            else -> { { context.contentResolver.openInputStream(Uri.parse(uriString)) } }
+        }
         val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-        context.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, bounds) }
+        open()?.use { BitmapFactory.decodeStream(it, null, bounds) }
         var sample = 1
         while (min(bounds.outWidth, bounds.outHeight) / (sample * 2) >= targetPx) sample *= 2
         val opts = BitmapFactory.Options().apply { inSampleSize = sample }
-        context.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, opts) }
+        open()?.use { BitmapFactory.decodeStream(it, null, opts) }
     } catch (_: Exception) {
         null // Ảnh đã bị xoá / không đọc được → dùng ô màu.
     }

@@ -45,6 +45,7 @@ import com.family.homnayangi.domain.RecipeText
 import com.family.homnayangi.domain.TextNormalizer
 import com.family.homnayangi.domain.model.DishCategory
 import com.family.homnayangi.domain.model.DishInfo
+import com.family.homnayangi.ui.common.DishImage
 
 /** Bảng chọn món để Mẹ thêm vào mâm: tìm không dấu + lọc theo loại. Bấm một món là thêm luôn và đóng bảng. */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -130,7 +131,7 @@ fun AddDishSheet(
                             .clickable(onClickLabel = "Thêm vào mâm") { onPick(dish) }
                             .padding(vertical = 6.dp),
                     ) {
-                        CategoryBadge(dish.category, size = 52)
+                        DishImage(dish, MaterialTheme.shapes.medium, Modifier.size(width = 88.dp, height = 66.dp))
                         Column(Modifier.weight(1f)) {
                             Text(dish.name, style = MaterialTheme.typography.titleSmall)
                             Text(

@@ -53,7 +53,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.family.homnayangi.domain.RecipeText
 import com.family.homnayangi.domain.model.DishInfo
-import com.family.homnayangi.ui.today.CategoryBadge
+import com.family.homnayangi.ui.common.DishImage
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 
@@ -204,7 +204,7 @@ private fun DishRow(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier.weight(1f).heightIn(min = 56.dp).clickable(onClickLabel = "Xem cách nấu", onClick = onOpen),
             ) {
-                CategoryBadge(dish.category, size = 52)
+                DishImage(dish, MaterialTheme.shapes.medium, Modifier.size(width = 88.dp, height = 66.dp))
                 Column(Modifier.weight(1f)) {
                     Text(dish.name, style = MaterialTheme.typography.titleSmall)
                     Text(
