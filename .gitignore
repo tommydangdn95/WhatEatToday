@@ -13,3 +13,10 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Khoá API — không bao giờ commit
+Secret.txt
+tools/.gemini_web_processed.txt
+# PNG gốc Gemini tải về (~8 MB/ảnh) — bản JPEG nằm ở art/dish_images_original/
+/images/
+__pycache__/
