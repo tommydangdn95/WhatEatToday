@@ -18,6 +18,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +39,7 @@ import com.family.homnayangi.ui.dishes.DishesScreen
 import com.family.homnayangi.ui.history.HistoryScreen
 import com.family.homnayangi.ui.recipe.RecipeScreen
 import com.family.homnayangi.ui.recipe.RecipeViewModel
+import com.family.homnayangi.ui.settings.SettingsScreen
 import com.family.homnayangi.ui.today.TodayScreen
 
 /** 5 tab ở thanh điều hướng dưới cùng (SPEC mục 9). */
@@ -54,11 +56,16 @@ enum class Tab(
     HISTORY("history", "Lịch sử", icon = Icons.Filled.DateRange),
 }
 
+/** [openTodaySignal] tăng mỗi lần bấm thông báo nhắc → chuyển về tab Hôm nay. */
 @Composable
-fun AppRoot() {
+fun AppRoot(openTodaySignal: Int = 0) {
     val nav = rememberNavController()
     val backStack by nav.currentBackStackEntryAsState()
     val currentRoute = backStack?.destination?.route
+
+    LaunchedEffect(openTodaySignal) {
+        if (openTodaySignal > 0) nav.navigateToTab(Tab.TODAY)
+    }
 
     Scaffold(
         bottomBar = {
@@ -98,7 +105,7 @@ fun AppRoot() {
             composable(Tab.SHOPPING.route) { ComingSoon("Đi chợ") }
             composable(Tab.DISHES.route) { DishesScreen(onOpenRecipe = { nav.navigate(RecipeViewModel.route(it)) }) }
             composable(Tab.HISTORY.route) { HistoryScreen(onCookAgain = { nav.navigateToTab(Tab.TODAY) }) }
-            composable(SETTINGS_ROUTE) { ComingSoon("Cài đặt") }
+            composable(SETTINGS_ROUTE) { SettingsScreen(onBack = { nav.popBackStack() }) }
             composable(
                 RecipeViewModel.ROUTE,
                 arguments = listOf(navArgument(RecipeViewModel.ARG_DISH_ID) { type = NavType.StringType }),
@@ -109,10 +116,15 @@ fun AppRoot() {
 
 private const val SETTINGS_ROUTE = "settings"
 
-private fun NavHostController.navigateToTab(tab: Tab) = navigate(tab.route) {
-    popUpTo(graph.findStartDestination().id) { saveState = true }
-    launchSingleTop = true
-    restoreState = true
+private fun NavHostController.navigateToTab(tab: Tab) {
+    // Màn gốc của tab đã có trong back stack (vd đang ở Cài đặt / Cách nấu mở từ tab đó) → quay về màn gốc.
+    // Không làm vậy thì restoreState sẽ mở lại đúng màn Cài đặt / Cách nấu vừa rời đi.
+    if (popBackStack(tab.route, inclusive = false)) return
+    navigate(tab.route) {
+        popUpTo(graph.findStartDestination().id) { saveState = true }
+        launchSingleTop = true
+        restoreState = true
+    }
 }
 
 @Composable

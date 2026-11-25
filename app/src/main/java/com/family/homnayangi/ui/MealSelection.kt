@@ -9,8 +9,11 @@ import java.time.LocalDateTime
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/** Một mâm được chép từ Lịch sử ("Nấu lại mâm này") để Mẹ xem rồi chốt. */
-data class CopiedMeal(val target: MealTarget, val dishIds: List<String>)
+/**
+ * Một mâm có sẵn để Mẹ xem rồi chốt: chép từ Lịch sử ("Nấu lại mâm này"),
+ * hoặc mâm gợi ý trong thông báo nhắc (để mở app thấy đúng các món đã đọc trong thông báo).
+ */
+data class CopiedMeal(val target: MealTarget, val dishIds: List<String>, val fromHistory: Boolean = true)
 
 /**
  * Bữa đang chọn trên màn hình Hôm nay, dùng chung giữa các tab
@@ -45,6 +48,12 @@ class MealSelection @Inject constructor() {
     fun copyToCurrent(dishIds: List<String>) {
         lastManualChange = System.currentTimeMillis()
         _copied.value = CopiedMeal(_target.value, dishIds)
+    }
+
+    /** Bấm vào thông báo nhắc (F17): mở đúng bữa, hiện đúng mâm đã gợi ý trong thông báo. */
+    fun openFromReminder(target: MealTarget, dishIds: List<String>) {
+        select(target)
+        _copied.value = if (dishIds.isEmpty()) null else CopiedMeal(target, dishIds, fromHistory = false)
     }
 
     fun consumeCopied(): CopiedMeal? = _copied.value.also { _copied.value = null }

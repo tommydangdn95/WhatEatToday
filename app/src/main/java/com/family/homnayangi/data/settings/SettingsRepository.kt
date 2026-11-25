@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import com.family.homnayangi.domain.ReminderKind
 import java.time.LocalTime
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -25,7 +26,13 @@ data class AppSettings(
     val reminderLunchMorning: LocalTime = LocalTime.of(6, 0),
     val remindersEnabled: Boolean = true,
     val quickFilterUnder30: Boolean = false,
-)
+) {
+    fun reminderTime(kind: ReminderKind): LocalTime = when (kind) {
+        ReminderKind.LUNCH_PREV_DAY -> reminderLunchPrevDay
+        ReminderKind.DINNER -> reminderDinner
+        ReminderKind.LUNCH_MORNING -> reminderLunchMorning
+    }
+}
 
 @Singleton
 class SettingsRepository @Inject constructor(
@@ -69,6 +76,16 @@ class SettingsRepository @Inject constructor(
     suspend fun setMinDishes(value: Int) = dataStore.edit { it[Keys.minDishes] = value.coerceAtLeast(4) }
     suspend fun setRepeatAvoidDays(value: Int) = dataStore.edit { it[Keys.repeatAvoidDays] = value.coerceAtLeast(0) }
     suspend fun setRemindersEnabled(enabled: Boolean) = dataStore.edit { it[Keys.remindersEnabled] = enabled }
+    suspend fun setServings(value: Int) = dataStore.edit { it[Keys.servings] = value.coerceIn(1, 30) }
+
+    suspend fun setReminderTime(kind: ReminderKind, time: LocalTime) = dataStore.edit {
+        val key = when (kind) {
+            ReminderKind.LUNCH_PREV_DAY -> Keys.reminderLunchPrevDay
+            ReminderKind.DINNER -> Keys.reminderDinner
+            ReminderKind.LUNCH_MORNING -> Keys.reminderLunchMorning
+        }
+        it[key] = time.hour * 60 + time.minute
+    }
 
     suspend fun seedVersion(): Int = dataStore.data.first()[Keys.seedVersion] ?: 0
     suspend fun setSeedVersion(version: Int) = dataStore.edit { it[Keys.seedVersion] = version }

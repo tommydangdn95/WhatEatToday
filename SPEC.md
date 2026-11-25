@@ -291,6 +291,8 @@ Mâm gồm 4 slot: `MAN`, `RAU`, `CANH`, `MON_4`.
 
 - Mỗi thẻ món có nút "Đổi" → thay đúng slot đó bằng món khác cùng loại, không lặp món vừa bị đổi trong phiên.
 - Nút "Đổi cả mâm" → gợi ý lại toàn bộ.
+- Nút "+ Thêm món" (khi chưa chốt) → bảng chọn món (tìm không dấu, lọc theo loại; không có món đã ẩn / đã trong mâm). Món thêm vào slot `THEM` ở cuối mâm, loại nào cũng được; Mẹ tự chọn nên không áp tránh lặp / trùng thịt cá. Món thêm khi "Đổi món" thì đổi sang món **cùng loại** với nó.
+- Mọi thẻ món có "Đổi món" và "Bỏ món" (bỏ khỏi bữa này, có Hoàn tác, **không** ẩn món). Bỏ được cả 4 món chính → mâm Mẹ tự sửa có thể dưới 4 món (người dùng quyết định); gợi ý tự động vẫn luôn đủ 4. Ẩn món ("Nhà không ăn") chỉ còn ở tab Món nhà.
 - Nút lớn "Chọn mâm này" → chốt (tạo / ghi đè `MealLog`) → sang F12, F25.
 
 ### F04 — Tránh lặp món
@@ -362,6 +364,9 @@ Yêu cầu kỹ thuật:
 - Trên API 28–29 không cần quyền `SCHEDULE_EXACT_ALARM` / `POST_NOTIFICATIONS`; vẫn viết code kiểm tra theo `SDK_INT` cho máy mới hơn.
 - Màn hình Cài đặt có mục "Kiểm tra nhắc nhở" để gửi thử thông báo ngay.
 - Hướng dẫn trong Cài đặt (có ảnh): bật **Tự khởi động** và tắt **tối ưu pin** cho app trên Vivo (Funtouch OS hay tắt app chạy nền).
+  - Bản hiện tại: hướng dẫn bằng chữ (chưa có ảnh) + nút "Tắt tối ưu pin" (`ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS`, hiện "Đã tắt" khi xong) và nút "Mở Tự khởi động" (thử các màn của Vivo, không có thì mở trang thông tin app).
+- Thông báo chưa chốt kèm mâm gợi ý; bấm vào thì app hiện **đúng mâm đó** (truyền `dishIds` trong `PendingIntent`), để Mẹ không thấy món khác với thông báo.
+- Màn Cài đặt: bật/tắt nhắc, đổi giờ 3 mốc (đồng hồ 24 giờ), "Gửi thử thông báo" (gửi đúng loại nhắc của bữa sắp tới), cảnh báo khi thông báo bị tắt / không được đặt báo thức chính xác, số người ăn, số ngày tránh lặp món.
 
 ### F19 — Gợi ý theo thời tiết
 
@@ -378,9 +383,9 @@ Yêu cầu kỹ thuật:
 ### F25 — Gửi thực đơn cho cả nhà qua Zalo
 
 - Nút "Gửi cho cả nhà" trên mâm đã chốt.
-- `MenuImageRenderer` vẽ ảnh PNG 1080×1350: tiêu đề "Trưa nay mẹ nấu" / "Tối nay mẹ nấu" + ngày, ảnh và tên từng món, dòng cuối "Cho 7 người".
+- `MenuImageRenderer` vẽ ảnh PNG 1080×1350: tiêu đề "Trưa nay mẹ nấu" / "Tối nay mẹ nấu" + ngày, ảnh và tên từng món (không ghi số người — người dùng bỏ dòng "Cho 7 người").
 - Lưu vào `cacheDir/share/menu_<date>_<meal>.png`, chia sẻ qua `FileProvider` (không cần quyền bộ nhớ).
-- Intent: `ACTION_SEND`, `type = "image/png"`, `EXTRA_STREAM` + `EXTRA_TEXT`, `FLAG_GRANT_READ_URI_PERMISSION`.
+- Intent: `ACTION_SEND`, `type = "image/png"`, `EXTRA_STREAM` (chỉ gửi ảnh, không kèm chữ; chỉ khi vẽ ảnh lỗi mới gửi `text/plain`), `FLAG_GRANT_READ_URI_PERMISSION`.
 - Nếu đã cài Zalo (`com.zing.zalo`): `setPackage("com.zing.zalo")`; nếu không: `Intent.createChooser`.
 - Mẫu chữ đi kèm:
 

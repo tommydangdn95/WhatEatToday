@@ -98,6 +98,12 @@ class MenuTextTest {
     private val today = LocalDate.of(2026, 11, 10) // Thứ Ba
 
     @Test
+    fun `chu tren anh thuc don F25`() {
+        assertEquals("Tối nay mẹ nấu", MenuText.shareHeading(MealTarget(today, MealType.TOI), today))
+        assertEquals("Thứ Ba, 10/11", MenuText.longDate(today))
+    }
+
+    @Test
     fun `mau chu gui Zalo dung F25`() {
         val text = MenuText.shareMessage(
             MealTarget(today, MealType.TRUA), today,

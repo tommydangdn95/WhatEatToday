@@ -43,6 +43,7 @@ domain/      Kotlin thuần, không import Android → unit test được
   MenuText           mọi câu chữ: tiêu đề, ngày, mẫu tin nhắn Zalo
   TextNormalizer     bỏ dấu để tìm kiếm không dấu
   RecipeText         tách dòng khi sửa công thức, link tìm kiếm YouTube, nhãn thời gian nấu
+  ReminderPlanner    F17: giờ báo kế tiếp, bữa của từng mốc nhắc, câu chữ thông báo
   model/             enum + DishInfo, MealRecord, MealTarget, MealSlot
 data/
   db/        Room: Entities.kt, Daos.kt, Converters.kt, AppDatabase.kt
@@ -50,13 +51,17 @@ data/
   settings/  SettingsRepository (DataStore, SPEC §5.3)
   repo/      DishRepository, MealRepository, PantryRepository
 di/          AppModule (Hilt)
+reminder/    F17: ReminderScheduler (AlarmManager), ReminderNotifier (dựng thông báo + gợi ý), ReminderReceiver, BootReceiver
 share/       ZaloSharer
-ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, today/, history/, recipe/, dishes/
+ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, today/, history/, recipe/, dishes/, settings/
 ```
 
 - MVVM: `@HiltViewModel` + `StateFlow`; màn hình dùng `hiltViewModel()` từ `androidx.hilt.lifecycle.viewmodel.compose`.
 - `MealSelection` (@Singleton) giữ **bữa đang chọn** dùng chung giữa các tab (Lịch sử "Nấu lại" chép mâm sang; thông báo nhắc giờ sau này sẽ đặt bữa ở đây).
 - `TodayViewModel` cache mâm gợi ý theo từng `MealTarget`; chốt mâm thì bỏ cache các bữa khác có món trùng (F04).
+- Bấm thông báo nhắc: `MainActivity` đọc extra `date`/`mealType`/`dishIds` → `MealSelection.openFromReminder` (dùng `CopiedMeal` với `fromHistory=false`) → `AppRoot(openTodaySignal)` chuyển về tab Hôm nay.
+- `navigateToTab`: nếu màn gốc của tab đã có trong back stack thì `popBackStack` về đó (không thì `restoreState` mở lại đúng màn Cài đặt / Cách nấu vừa rời).
+- Báo thức được đặt lại mỗi lần app khởi động (`HomNayAnGiApp`), khi đổi cài đặt, và qua `BootReceiver` (khởi động máy, đổi giờ, cập nhật app).
 
 ## Quy ước bắt buộc
 
@@ -68,7 +73,7 @@ ui/          AppRoot (thanh điều hướng 5 tab), MealSelection, theme/, toda
 - **Seed:** `SeedLoader` chỉ insert IGNORE — không bao giờ ghi đè món Mẹ đã sửa/thích/ẩn. Thêm món mới vào `seed_data.json` thì tăng `version`.
 - **Công thức** (`assets/recipes.json`): version riêng (`recipesVersion`). Thêm món mới vào seed thì phải thêm công thức và tăng version của **cả hai** file — `RecipeFileTest` sẽ báo lỗi nếu có món thiếu công thức. Bước nấu không ghi số thứ tự ở đầu.
 - **MealLog:** mỗi (date, mealType) một bản ghi; chốt lại dùng `MealLogDao.upsertByMeal` (không dùng `REPLACE`/`@Upsert` vì unique index ngoài khoá chính).
-- **Quyền:** không khai báo `CAMERA` (chụp ảnh qua `TakePicture` không cần quyền; khai báo mà chưa cấp sẽ crash). Không xin vị trí, bộ nhớ.
+- **Quyền:** nhắc nhở dùng `RECEIVE_BOOT_COMPLETED`, `SCHEDULE_EXACT_ALARM`, `POST_NOTIFICATIONS` (chỉ hỏi trên API 33+), `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` (app nội bộ, không lên Play). Không khai báo `CAMERA` (chụp ảnh qua `TakePicture` không cần quyền; khai báo mà chưa cấp sẽ crash). Không xin vị trí, bộ nhớ.
 - Code dùng API > 28 phải bọc `if (Build.VERSION.SDK_INT >= …)`.
 - `SuggestionEngine` thay đổi gì cũng phải thêm/cập nhật test trong `SuggestionEngineTest`.
 - **Trọng số điểm** nằm ở hằng số trong `SuggestionEngine.Companion` (thời tiết 30, vùng 20, lâu chưa ăn 25, **yêu thích 10** theo yêu cầu người dùng, tủ lạnh 15; tổng phải = 100, có test kiểm). Món yêu thích chỉ được cộng điểm, không bao giờ được bỏ qua điều kiện lọc (ẩn, tránh lặp, lọc nhanh, đúng slot, trùng thịt/cá).
@@ -89,22 +94,24 @@ MSYS_NO_PATHCONV=1 "$ADB" shell am start -W -n com.family.homnayangi/.MainActivi
 - **Chạy test migration mà không gỡ app khỏi máy:** `./gradlew connectedDebugAndroidTest` sẽ gỡ app sau khi chạy (mất dữ liệu thử). Thay vào đó build `:app:assembleDebugAndroidTest`, cài `app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk` rồi chạy
   `adb shell am instrument -w -e class com.family.homnayangi.MigrationTest com.family.homnayangi.test/androidx.test.runner.AndroidJUnitRunner`.
 - Logcat lọc theo `SeedLoader` để xem dữ liệu ban đầu đã nạp chưa. Crash của `com.google.android.gms` trên máy này là của Google Play Services, không phải app.
-- Máy test **chưa cài Zalo** → nút "Gửi cho cả nhà" mở bảng chọn app (đúng SPEC).
+- Máy test **đã cài Zalo bằng tài khoản thật của người dùng** → nút "Gửi cho cả nhà" mở thẳng Zalo. Khi thử bằng script **không bấm gì trong Zalo** (danh bạ thật); xem ảnh bằng `adb exec-out run-as com.family.homnayangi cat cache/share/menu_<ngày>_<bữa>.png`.
+- `uiautomator dump` ra file rỗng khi Zalo đang ở trên cùng.
 
 ## Tiến độ (cập nhật 10/11/2026, sau F10 + yêu thích)
 
 Đã xong (đều đã chạy thử trên máy):
 - Khung project, Room, SeedLoader, SuggestionEngine + 28 unit test
-- **Hôm nay** (F01–F05, tim/ẩn của F09 trên thẻ): chọn bữa/ngày, đổi món, đổi cả mâm, lọc món nhanh, chốt, chọn lại, gửi Zalo **dạng chữ**
+- **Hôm nay** (F01–F05, tim của F09 trên thẻ): chọn bữa/ngày, đổi món, đổi cả mâm, **"+ Thêm món"** (bảng chọn `AddDishSheet`, slot `THEM`, "Bỏ món" trên **mọi** thẻ — bỏ khỏi bữa, không ẩn, mâm có thể < 4 món theo ý người dùng; ẩn món chỉ ở tab Món nhà), lọc món nhanh, chốt, chọn lại, gửi Zalo **chỉ ảnh thực đơn PNG, không kèm chữ, không ghi số người** (F25, `share/MenuImageRenderer`; chưa có ảnh món thì vẽ ô màu theo loại — `ui/theme/CategoryPalette`)
 - **Lịch sử** (F11): theo tuần, "Nấu lại mâm này"
 - **Món nhà** (F07, F09): lọc Tất cả / Yêu thích / Đã ẩn, tìm không dấu, tim, ẩn / bỏ ẩn có Hoàn tác, bấm món → Cách nấu. Món yêu thích = 10/100 điểm khi gợi ý
+- **Nhắc nhở** (F17) + **Cài đặt**: 3 mốc 20:00 / 13:00 / 06:00, đổi giờ, gửi thử, bấm thông báo mở đúng bữa + đúng mâm, đặt lại sau khởi động/cập nhật; hướng dẫn Vivo (chữ + nút), số người, số ngày tránh lặp
 - **Cách nấu** (F10): công thức 80 món (`recipes.json`), xem / sửa / thêm, nút tìm video YouTube; DB v2 + test migration chạy trên máy
 
 Chưa làm (theo thứ tự SPEC §11):
 1. Tủ lạnh (F06, F20) → Đi chợ (F12, F13; chốt mâm tự thêm nguyên liệu, trừ đồ có trong tủ lạnh)
 2. Thêm / sửa / xoá món riêng của Mẹ (F08) — nút "Thêm món" trong tab Món nhà
-3. Nhắc nhở (F17), thời tiết Open-Meteo (F19 — hiện đang dùng mặc định theo tháng), ảnh thực đơn PNG cho Zalo (F25)
-4. Cài đặt (nút bánh răng đang mở trang trống), hướng dẫn Vivo, ký APK release + bật R8
+3. Thời tiết Open-Meteo (F19 — hiện đang dùng mặc định theo tháng); ảnh hướng dẫn Vivo trong Cài đặt
+4. Ký APK release + bật R8; thử nhắc nhở 7 ngày liên tục trên máy Vivo thật (SPEC §12)
 
 Vấn đề đang mở:
 - Mở app lần đầu ~4 giây trên bản debug (SPEC yêu cầu < 2 giây) → đo lại trên bản release có R8.

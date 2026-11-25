@@ -5,6 +5,12 @@
     <!-- Thời tiết (F19). Không xin quyền vị trí, bộ nhớ. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Nhắc nhở (F17). Trên Android 10 (máy Mẹ) các quyền này tự có, không phải hỏi. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Nút "Tắt tối ưu pin" trong Cài đặt (Vivo hay tắt app chạy nền). App nội bộ, không lên Play. -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <!-- Không khai báo CAMERA: chụp ảnh món dùng app camera của máy (TakePicture) nên không cần quyền.
          Khai báo mà chưa cấp thì TakePicture sẽ crash (SecurityException). -->
 
@@ -49,6 +55,22 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <receiver
+            android:name=".reminder.ReminderReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".reminder.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <!-- Vivo / một số máy gửi bản "khởi động nhanh". -->
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
 
         <!-- WorkManager được khởi tạo thủ công qua Hilt (HiltWorkerFactory) ở bước làm thời tiết. -->
     </application>

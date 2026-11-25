@@ -59,6 +59,8 @@ data class TodayUiState(
     val cards: List<DishCardUi> = emptyList(),
     val quickFilter: Boolean = false,
     val weatherLine: String = "",
+    /** Các món Mẹ có thể chọn thêm vào mâm: chưa ẩn, chưa có trong mâm. */
+    val addable: List<DishInfo> = emptyList(),
 ) {
     val title: String get() = MenuText.question(target, today)
     val dateLine: String get() = MenuText.longDate(target.date)
@@ -69,8 +71,9 @@ data class TodayUiState(
 }
 
 sealed interface TodayEvent {
-    data class Hidden(val dishId: String, val dishName: String) : TodayEvent
     data object Confirmed : TodayEvent
+    /** Bỏ món khỏi mâm; [previous] = mâm trước khi bỏ, để Hoàn tác. */
+    data class Removed(val target: MealTarget, val previous: MealSuggestion, val dishName: String) : TodayEvent
 }
 
 @HiltViewModel
@@ -178,6 +181,10 @@ class TodayViewModel @Inject constructor(
             rechoosing = record != null && target in re,
             copiedFromHistory = !showConfirmed && target in copied,
             cards = cards,
+            addable = if (showConfirmed) emptyList() else {
+                val inMeal = cards.mapNotNullTo(HashSet()) { it.dish?.id }
+                i.dishes.filter { !it.isHidden && it.id !in inMeal }
+            },
         )
     }
 
@@ -199,8 +206,14 @@ class TodayViewModel @Inject constructor(
             selection.consumeCopied()
             val meal = engine.arrange(i.dishes, contextFor(i, target), copied.dishIds, fillMissing = true)
             suggestions.update { it + (target to meal) }
-            copiedTargets.update { it + target }
-            if (i.confirmed(target) != null) rechoosing.update { it + target }
+            if (copied.fromHistory) {
+                copiedTargets.update { it + target }
+                if (i.confirmed(target) != null) rechoosing.update { it + target }
+            } else {
+                // Mâm từ thông báo nhắc thay cho gợi ý cũ → coi như gợi ý mới.
+                rejected.remove(target)
+                copiedTargets.update { it - target }
+            }
             return
         }
         val confirmed = i.confirmed(target) != null && target !in rechoosing.value
@@ -258,6 +271,26 @@ class TodayViewModel @Inject constructor(
         viewModelScope.launch { settingsRepository.setQuickFilter(enabled) }
     }
 
+    // ---------------------------------------------------------------- Mẹ tự thêm / bỏ món
+
+    fun addDish(dishId: String): Unit = withCurrent { i, target ->
+        val current = suggestions.value[target] ?: return
+        suggestions.update { it + (target to engine.addDish(i.dishes, contextFor(i, target), current, dishId)) }
+    }
+
+    fun remove(index: Int): Unit = withCurrent { _, target ->
+        val current = suggestions.value[target] ?: return
+        val name = current.picks.getOrNull(index)?.dish?.dish?.name ?: return
+        val next = engine.remove(current, index)
+        if (next == current) return
+        suggestions.update { it + (target to next) }
+        viewModelScope.launch { events.send(TodayEvent.Removed(target, current, name)) }
+    }
+
+    fun undoRemove(event: TodayEvent.Removed) {
+        suggestions.update { it + (event.target to event.previous) }
+    }
+
     // ---------------------------------------------------------------- chốt mâm
 
     fun confirm(): Unit = withCurrent { _, target ->
@@ -278,7 +311,8 @@ class TodayViewModel @Inject constructor(
     /** "Chọn lại": mở mâm đã chốt ra để đổi món; bắt đầu từ chính các món đã chốt. */
     fun rechoose(): Unit = withCurrent { i, target ->
         val record = i.confirmed(target) ?: return
-        val meal = engine.arrange(i.dishes, contextFor(i, target), record.dishIds, fillMissing = true)
+        // Giữ đúng mâm Mẹ đã chốt (có thể ít hơn 4 món), không tự thêm.
+        val meal = engine.arrange(i.dishes, contextFor(i, target), record.dishIds, fillMissing = false)
         suggestions.update { it + (target to meal) }
         rechoosing.update { it + target }
     }
@@ -288,27 +322,9 @@ class TodayViewModel @Inject constructor(
         copiedTargets.update { it - target }
     }
 
-    // ---------------------------------------------------------------- yêu thích / ẩn (F09)
+    // ---------------------------------------------------------------- yêu thích (F09)
 
     fun toggleFavorite(dish: DishInfo) {
         viewModelScope.launch { dishRepo.setFavorite(dish.id, !dish.isFavorite) }
-    }
-
-    /** "Nhà không ăn món này": ẩn món, thay ngay bằng món khác, có Hoàn tác. */
-    fun hide(index: Int): Unit = withCurrent { i, target ->
-        val current = suggestions.value[target] ?: return
-        val dish = current.picks.getOrNull(index)?.dish?.dish ?: return
-        val set = rejected.getOrPut(target) { HashSet() }
-        set += dish.id
-        val pool = i.dishes.filterNot { it.id == dish.id }
-        suggestions.update { it + (target to engine.swap(pool, contextFor(i, target), current, index, set)) }
-        viewModelScope.launch {
-            dishRepo.setHidden(dish.id, true)
-            events.send(TodayEvent.Hidden(dish.id, dish.name))
-        }
-    }
-
-    fun undoHide(dishId: String) {
-        viewModelScope.launch { dishRepo.setHidden(dishId, false) }
     }
 }

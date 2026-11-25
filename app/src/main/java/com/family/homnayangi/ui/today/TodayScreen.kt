@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -52,6 +53,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -70,8 +74,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.family.homnayangi.domain.model.DishCategory
 import com.family.homnayangi.domain.model.DishInfo
 import com.family.homnayangi.domain.model.MealType
+import com.family.homnayangi.share.MenuImageRenderer
 import com.family.homnayangi.share.ZaloSharer
+import com.family.homnayangi.ui.theme.CategoryPalette
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 
 @Composable
@@ -85,22 +93,23 @@ fun TodayScreen(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
+    var showAddSheet by rememberSaveable { mutableStateOf(false) }
+
     LifecycleEventEffect(Lifecycle.Event.ON_START) { viewModel.onAppForeground() }
 
     LaunchedEffect(Unit) {
         viewModel.eventFlow.collect { event ->
             when (event) {
-                is TodayEvent.Hidden -> scope.launch {
+                is TodayEvent.Removed -> scope.launch {
                     snackbar.currentSnackbarData?.dismiss()
-                    // SPEC mục 2: Hoàn tác trong 5 giây.
                     val result = withTimeoutOrNull(5_000) {
                         snackbar.showSnackbar(
-                            message = "Đã ẩn \"${event.dishName}\"",
+                            message = "Đã bỏ \"${event.dishName}\" khỏi mâm",
                             actionLabel = "Hoàn tác",
                             duration = SnackbarDuration.Indefinite,
                         )
                     }
-                    if (result == SnackbarResult.ActionPerformed) viewModel.undoHide(event.dishId)
+                    if (result == SnackbarResult.ActionPerformed) viewModel.undoRemove(event)
                 }
                 TodayEvent.Confirmed -> scope.launch {
                     snackbar.currentSnackbarData?.dismiss()
@@ -119,12 +128,34 @@ fun TodayScreen(
                     state = state,
                     onConfirm = viewModel::confirm,
                     onKeep = viewModel::keepConfirmed,
-                    onShare = { ZaloSharer.share(context, state.shareMessage()) },
+                    onShare = {
+                        scope.launch {
+                            val s = state
+                            val dishes = s.cards.mapNotNull { it.dish }
+                            // F25: vẽ ảnh thực đơn ở luồng nền; lỗi thì vẫn gửi được dạng chữ.
+                            val image = runCatching {
+                                withContext(Dispatchers.Default) {
+                                    MenuImageRenderer.renderToUri(context, s.target, s.today, dishes)
+                                }
+                            }.getOrNull()
+                            ZaloSharer.share(context, s.shareMessage(), image)
+                        }
+                    },
                     onRechoose = viewModel::rechoose,
                 )
             }
         },
     ) { padding ->
+        if (showAddSheet && state.mode == TodayMode.SUGGESTING) {
+            AddDishSheet(
+                dishes = state.addable,
+                onPick = { dish ->
+                    viewModel.addDish(dish.id)
+                    showAddSheet = false
+                },
+                onDismiss = { showAddSheet = false },
+            )
+        }
         LazyColumn(
             modifier = Modifier.fillMaxSize().padding(padding),
             contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
@@ -148,13 +179,24 @@ fun TodayScreen(
                     card = card,
                     editable = state.mode == TodayMode.SUGGESTING,
                     onSwap = { viewModel.swap(index) },
-                    onHide = { viewModel.hide(index) },
+                    onRemove = { viewModel.remove(index) },
                     onFavorite = { card.dish?.let(viewModel::toggleFavorite) },
                     onOpenRecipe = { card.dish?.let { onOpenRecipe(it.id) } },
                 )
             }
 
             if (state.mode == TodayMode.SUGGESTING) {
+                item {
+                    OutlinedButton(
+                        onClick = { showAddSheet = true },
+                        enabled = state.addable.isNotEmpty(),
+                        modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
+                    ) {
+                        Icon(Icons.Filled.Add, contentDescription = null)
+                        Spacer(Modifier.width(8.dp))
+                        Text("Thêm món", style = MaterialTheme.typography.labelLarge)
+                    }
+                }
                 item {
                     OutlinedButton(
                         onClick = viewModel::reshuffle,
@@ -278,7 +320,7 @@ private fun DishCard(
     card: DishCardUi,
     editable: Boolean,
     onSwap: () -> Unit,
-    onHide: () -> Unit,
+    onRemove: () -> Unit,
     onFavorite: () -> Unit,
     onOpenRecipe: () -> Unit,
 ) {
@@ -332,9 +374,9 @@ private fun DishCard(
                         Spacer(Modifier.width(8.dp))
                         Text("Đổi món", style = MaterialTheme.typography.labelLarge)
                     }
-                    TextButton(onClick = onHide, modifier = Modifier.heightIn(min = 56.dp)) {
+                    TextButton(onClick = onRemove, modifier = Modifier.heightIn(min = 56.dp)) {
                         Text(
-                            "Nhà không ăn",
+                            "Bỏ món",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -382,11 +424,8 @@ private fun FavoriteButton(dish: DishInfo, onClick: () -> Unit) {
 @Composable
 fun CategoryBadge(category: DishCategory?, size: Int = 64) {
     val (bg, fg) = when (category) {
-        DishCategory.MAN -> Color(0xFF8A3A00) to Color.White
-        DishCategory.XAO -> Color(0xFF6D4C00) to Color.White
-        DishCategory.RAU -> Color(0xFF1E5E20) to Color.White
-        DishCategory.CANH -> Color(0xFF0B4F6C) to Color.White
         null -> MaterialTheme.colorScheme.surfaceVariant to MaterialTheme.colorScheme.onSurfaceVariant
+        else -> Color(CategoryPalette.argb(category)) to Color.White
     }
     Box(
         modifier = Modifier.size(size.dp).background(bg, MaterialTheme.shapes.medium),

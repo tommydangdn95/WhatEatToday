@@ -1,13 +1,14 @@
 package com.family.homnayangi.share
 
 import android.content.ActivityNotFoundException
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 
 /**
- * F25 — gửi thực đơn sang Zalo. Bản này gửi chữ; ảnh thực đơn (MenuImageRenderer) sẽ thêm sau.
+ * F25 — gửi thực đơn sang Zalo: chỉ gửi ảnh PNG (MenuImageRenderer); vẽ ảnh lỗi thì mới gửi chữ.
  * Có Zalo → mở thẳng Zalo; không có → hiện bảng chọn app của Android.
  */
 object ZaloSharer {
@@ -25,11 +26,14 @@ object ZaloSharer {
             if (imageUri != null) {
                 type = "image/png"
                 putExtra(Intent.EXTRA_STREAM, imageUri)
+                // ClipData để quyền đọc ảnh đi theo cả qua bảng chọn app.
+                clipData = ClipData.newRawUri(null, imageUri)
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                // Có ảnh thì chỉ gửi ảnh, không kèm chữ (theo yêu cầu người dùng).
             } else {
                 type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, text)
             }
-            putExtra(Intent.EXTRA_TEXT, text)
         }
         if (isZaloInstalled(context)) {
             try {

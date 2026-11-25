@@ -335,6 +335,66 @@ class SuggestionEngineTest {
         }
     }
 
+    // ------------------------------------------------------------ Mẹ tự thêm món vào mâm
+
+    @Test
+    fun `them mon noi vao cuoi mam, khong them trung`() {
+        val engine = SuggestionEngine(Random(4))
+        val meal = engine.suggest(seedDishes, ctx())
+        val extra = seedDishes.first { it.category == DishCategory.RAU && it.id !in meal.dishIds }.id
+        val added = engine.addDish(seedDishes, ctx(), meal, extra)
+        assertEquals(5, added.picks.size)
+        assertEquals(meal.picks, added.picks.take(4))
+        assertEquals(MealSlot.THEM, added.picks.last().slot)
+        assertEquals(extra, added.picks.last().dish!!.dish.id)
+        // Món đã có trong mâm / món không tồn tại → giữ nguyên.
+        assertEquals(added, engine.addDish(seedDishes, ctx(), added, extra))
+        assertEquals(added, engine.addDish(seedDishes, ctx(), added, "khong_co"))
+    }
+
+    @Test
+    fun `doi mon them giu dung loai cua mon do`() {
+        val c = ctx()
+        repeat(50) { seed ->
+            val engine = SuggestionEngine(Random(seed))
+            val meal = engine.suggest(seedDishes, c)
+            val rau = seedDishes.first { it.category == DishCategory.RAU && it.id !in meal.dishIds }.id
+            val added = engine.addDish(seedDishes, c, meal, rau)
+            val swapped = engine.swap(seedDishes, c, added, 4, setOf(rau))
+            val dish = swapped.picks[4].dish!!.dish
+            assertEquals(DishCategory.RAU, dish.category)
+            assertNotEquals(rau, dish.id)
+            assertFalse("trùng món đã có trong mâm", dish.id in meal.dishIds)
+        }
+    }
+
+    @Test
+    fun `bo mon nao cung duoc, ke ca 4 mon chinh`() {
+        val engine = SuggestionEngine(Random(5))
+        val meal = engine.suggest(seedDishes, ctx())
+        val extra = seedDishes.first { it.id !in meal.dishIds }.id
+        val added = engine.addDish(seedDishes, ctx(), meal, extra)
+        assertEquals(meal, engine.remove(added, 4))
+        // Bỏ món mặn → mâm còn 3 món, các món khác giữ nguyên thứ tự.
+        val noMan = engine.remove(meal, 0)
+        assertEquals(meal.picks.drop(1), noMan.picks)
+        assertEquals(noMan, engine.remove(noMan, 99))
+        // Mâm 3 món đã chốt, xếp lại không tự thêm món.
+        val arranged = engine.arrange(seedDishes, ctx(), noMan.dishIds, fillMissing = false)
+        assertEquals(noMan.dishIds.toSet(), arranged.dishIds.toSet())
+    }
+
+    @Test
+    fun `mam da chot co mon them xep lai van giu du mon`() {
+        val engine = SuggestionEngine(Random(6))
+        val meal = engine.suggest(seedDishes, ctx())
+        val extras = seedDishes.filter { it.id !in meal.dishIds && it.category == DishCategory.CANH }.take(2).map { it.id }
+        val added = extras.fold(meal) { m, id -> engine.addDish(seedDishes, ctx(), m, id) }
+        val arranged = engine.arrange(seedDishes, ctx(), added.dishIds, fillMissing = false)
+        assertEquals(added.dishIds.toSet(), arranged.dishIds.toSet())
+        assertEquals(6, arranged.picks.size)
+    }
+
     private fun <T : Any> assertNotNullAndGet(value: T?): T {
         assertNotNull(value)
         return value!!

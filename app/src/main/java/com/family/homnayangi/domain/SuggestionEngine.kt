@@ -1,5 +1,6 @@
 package com.family.homnayangi.domain
 
+import com.family.homnayangi.domain.model.DishCategory
 import com.family.homnayangi.domain.model.DishInfo
 import com.family.homnayangi.domain.model.MealRecord
 import com.family.homnayangi.domain.model.MealSlot
@@ -126,7 +127,7 @@ class SuggestionEngine(private val random: Random = Random.Default) {
         val usedIds = HashSet<String>()
         val usedProteins = HashSet<String>()
         for (slot in MealSlot.slotsFor(ctx.minDishes)) {
-            val chosen = pickForSlot(slot, ranked, ctx, lastEaten, usedIds, usedProteins)
+            val chosen = pickForSlot(slot.categories, ranked, ctx, lastEaten, usedIds, usedProteins)
             if (chosen != null) {
                 usedIds += chosen.dish.id
                 usedProteins += chosen.dish.proteinIngredientIds
@@ -154,14 +155,37 @@ class SuggestionEngine(private val random: Random = Random.Default) {
         val lastEaten = daysSinceLastEaten(ctx)
         val othersIds = others.mapTo(HashSet()) { it.id }
         val currentId = target.dish?.dish?.id
+        // Món Mẹ tự thêm (slot THEM) đổi sang món cùng loại với nó, vd thêm một món rau thì đổi ra rau khác.
+        val categories = target.dish?.dish?.category?.takeIf { target.slot == MealSlot.THEM }?.let { setOf(it) }
+            ?: target.slot.categories
 
         val replacement =
-            pickForSlot(target.slot, ranked, ctx, lastEaten, othersIds + rejected + listOfNotNull(currentId), usedProteins)
+            pickForSlot(categories, ranked, ctx, lastEaten, othersIds + rejected + listOfNotNull(currentId), usedProteins)
                 // Đã đổi hết các món cùng loại trong phiên → cho phép quay lại món đã bị đổi, chỉ trừ món đang hiện.
-                ?: pickForSlot(target.slot, ranked, ctx, lastEaten, othersIds + listOfNotNull(currentId), usedProteins)
+                ?: pickForSlot(categories, ranked, ctx, lastEaten, othersIds + listOfNotNull(currentId), usedProteins)
                 ?: return current
 
         return MealSuggestion(current.picks.toMutableList().also { it[index] = SlotPick(target.slot, replacement) })
+    }
+
+    /**
+     * Mẹ tự chọn thêm một món vào mâm (slot THEM, nối vào cuối).
+     * Mẹ đã chủ động chọn nên không áp luật tránh lặp / trùng thịt cá; chỉ bỏ qua nếu món đã có trong mâm hoặc không còn.
+     */
+    fun addDish(dishes: List<DishInfo>, ctx: SuggestionContext, current: MealSuggestion, dishId: String): MealSuggestion {
+        if (dishId in current.dishIds) return current
+        val dish = dishes.firstOrNull { it.id == dishId } ?: return current
+        val scored = score(dish, ctx, daysSinceLastEaten(ctx)[dishId])
+        return MealSuggestion(current.picks + SlotPick(MealSlot.THEM, scored))
+    }
+
+    /**
+     * Mẹ bấm "Bỏ món": bỏ món ở vị trí [index] khỏi mâm, kể cả 4 món chính (mâm có thể còn dưới 4 món —
+     * gợi ý ban đầu vẫn đủ 4, nhưng Mẹ tự sửa thì Mẹ quyết). Món không bị ẩn.
+     */
+    fun remove(current: MealSuggestion, index: Int): MealSuggestion {
+        if (index !in current.picks.indices) return current
+        return MealSuggestion(current.picks.filterIndexed { i, _ -> i != index })
     }
 
     /**
@@ -193,7 +217,7 @@ class SuggestionEngine(private val random: Random = Random.Default) {
                 if (picks[i].dish != null) continue
                 val used = picks.mapNotNull { it.dish?.dish }
                 val chosen = pickForSlot(
-                    picks[i].slot, ranked, ctx, lastEaten,
+                    picks[i].slot.categories, ranked, ctx, lastEaten,
                     used.mapTo(HashSet()) { it.id },
                     used.flatMapTo(HashSet()) { it.proteinIngredientIds },
                 )
@@ -204,14 +228,14 @@ class SuggestionEngine(private val random: Random = Random.Default) {
     }
 
     private fun pickForSlot(
-        slot: MealSlot,
+        categories: Set<DishCategory>,
         ranked: List<ScoredDish>,
         ctx: SuggestionContext,
         lastEaten: Map<String, Long>,
         excludeIds: Set<String>,
         usedProteins: Set<String>,
     ): ScoredDish? {
-        val base = ranked.filter { it.dish.category in slot.categories && it.dish.id !in excludeIds }
+        val base = ranked.filter { it.dish.category in categories && it.dish.id !in excludeIds }
         if (base.isEmpty()) return null
 
         fun recentlyEaten(d: DishInfo): Boolean = lastEaten[d.id]?.let { it <= ctx.repeatAvoidDays } ?: false
